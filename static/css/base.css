@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800&display=swap');
+
+
+:root {
+    --primary-dark:     #00347c;
+    --primary-main:     #004c98;
+    --primary-light:    #8ed1f3;
+    --primary-content:  #ffffff;
+
+    --background-1:     #ffffff;
+    --background-2:     #ebf7ff;
+
+    --clip-path: polygon(50% 0px, 100% 25%, 100% 75%, 50% 100%, 0px 75%, 0px 25%);
+
+    --font-family: 'Cairo', sans-serif;
+    --font-size: 16px;
+
+    --transition: 0.4s ease-in-out;
+
+    --border-radius: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    color: var(--primary-content);
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-size: var(--font-size);
+    width: 100%;
+}
+
+/** Navbar start */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-block: 1rem;
+    background-color: teal;
+}
+
+nav .links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+}
+
+nav .links li {
+    cursor: pointer;
+}
+
+nav #mobile-toggle,
+nav #side-navbar,
+nav #overlay {
+    display: none;
+}
+
+@media (max-width: 500px) {
+    nav .links {
+        display: none;   
+    }
+
+    nav #mobile-toggle, nav #mobile-toggle-close {
+        display: flex;
+        background-color: transparent;
+        font-size: 30px;
+        width: 30px;
+        height: 30px;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        border-radius: 6px;
+    }
+
+    nav #mobile-toggle-close {
+        margin-left: auto;
+    }
+
+    nav #mobile-toggle-close.rtl {
+        margin-right: auto;
+    }
+
+    nav #mobile-toggle:active, nav #mobile-toggle-close:active {
+        box-shadow: 0px 0px 0px 10px var(--primary-content);
+    }
+
+    nav #side-navbar {
+        display: flex;
+        position: fixed;
+        inset: 0 0 0 max(19%, 60px);
+        background-color: var(--primary-dark);
+        z-index: 10;
+        transition: var(--transition);
+        transform: translateX(100%);
+        padding: 1rem;
+    }
+
+    nav #side-navbar.rtl {
+        inset: 0 max(19%, 60px) 0 0;
+        transform: translateX(-100%);
+    }
+
+    nav #overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background-color: #0000008c;
+        z-index: 5;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transition: var(--transition);
+    }
+
+    nav #overlay.active {
+        opacity: 1;
+        pointer-events: unset;
+        visibility: visible;
+        cursor: pointer;
+    }
+
+    nav #side-navbar.active {
+        transform: translateX(0);
+    }
+}
+
+/** Navbar end */
+
+footer {
+    height: 40px;
+    width: 100%;
+    background-color: green;
+    position: absolute;
+    bottom: 0;
+}
+
+/* Common Utilities */
+
+.container {
+    padding-right: 3rem;
+    padding-left: 3rem;
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+    }
+}
