@@ -1,5 +1,22 @@
 {% load i18n %}
 
-<section>
-    
+<section class="container hero">
+    <div class="main-row">
+        <div id="intro-text">
+            <h2>launch programs training for the year 2023</h2>
+            <p>The Financial Academy launched the training programs for the year 2023 to develop and develop the capabilities of human cadres in the financial sector</p>
+        </div>
+    </div>
+    <div class="search">
+        <h3>
+            {% trans "What Are Searching For ?" %}
+        </h3>
+        <form action="">
+            {% csrf_token %}
+            <input name="search-query" type="text" placeholder="{% trans "What Are Searching For" %}">
+            <button type="submit">
+                <i class="bi bi-search"></i> {% trans "Search" %}
+            </button>
+        </form>
+    </div>
 </section>

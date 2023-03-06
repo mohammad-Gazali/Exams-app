@@ -2,23 +2,177 @@
 
 <nav class="container">
     <h1>
-        RBMC
+        <a href="">
+            {% trans "Alraida Academy" %}
+        </a>
     </h1>
     <ul class="links">
-        <li>
-            {% trans "Test" %}
+        <li class="hover-dropdown">
+            <span class="dropdown-text">
+                {% trans "Test" %}
+            </span>
+            <ul class="dropdown-list">
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="hover-dropdown">
+            <span class="dropdown-text">
+                {% trans "Test" %}
+            </span>
+            <ul class="dropdown-list">
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="hover-dropdown">
+            <span class="dropdown-text">
+                {% trans "Test" %}
+            </span>
+            <ul class="dropdown-list">
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="hover-dropdown">
+            <span class="dropdown-text">
+                {% trans "Test" %}
+            </span>
+            <ul class="dropdown-list">
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="hover-dropdown">
+            <span class="dropdown-text">
+                {% trans "Test" %}
+            </span>
+            <ul class="dropdown-list">
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        {% trans "Test Test Test" %}
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
-            {% trans "Test" %}
+            <a href="">
+                {% trans "Contact" %}
+            </a>
         </li>
         <li>
-            {% trans "Test" %}
+            <a href="">
+                {% trans "Support" %}
+            </a>
         </li>
-        <li>
-            {% trans "Test" %}
+        {% if user.is_authenticated %}
+            <li>
+                <a href="">
+                    {% trans "Logout" %}
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="">
+                    {% trans "Login" %}
+                </a>
+            </li>
+        {% endif %}
+        <li class="with-bg">
+            <i class="bi bi-translate"></i>
         </li>
-        <li>
-            {% trans "Test" %}
+        <li class="with-bg">
+            <div class="badge">
+                6
+            </div>
+            <i class="bi bi-cart3"></i>
         </li>
     </ul>
     <button id="mobile-toggle">
@@ -28,6 +182,191 @@
         <button id="mobile-toggle-close">
             <i class="bi bi-x-lg"></i>
         </button>
+        <ul class="side-links">
+            <li class="dropdown-side">
+                <span class="dropdown-text-side">
+                    {% trans "Test" %}
+                    <i class="bi bi-caret-down-fill"></i>
+                </span>
+                <ul class="dropdown-list-side">
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown-side">
+                <span class="dropdown-text-side">
+                    {% trans "Test" %}
+                    <i class="bi bi-caret-down-fill"></i>
+                </span>
+                <ul class="dropdown-list-side">
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown-side">
+                <span class="dropdown-text-side">
+                    {% trans "Test" %}
+                    <i class="bi bi-caret-down-fill"></i>
+                </span>
+                <ul class="dropdown-list-side">
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown-side">
+                <span class="dropdown-text-side">
+                    {% trans "Test" %}
+                    <i class="bi bi-caret-down-fill"></i>
+                </span>
+                <ul class="dropdown-list-side">
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown-side">
+                <span class="dropdown-text-side">
+                    {% trans "Test" %}
+                    <i class="bi bi-caret-down-fill"></i>
+                </span>
+                <ul class="dropdown-list-side">
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            {% trans "Test Test Test" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <hr />
+            <li>
+                <a href="">
+                    <i class="bi bi-envelope"></i>
+                    {% trans "Contact" %}
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="bi bi-question-circle"></i>
+                    {% trans "Support" %}
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+                <li>
+                    <a href="">
+                        <i class="bi bi-box-arrow-left"></i>
+                        {% trans "Logout" %}
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="">
+                        <i class="bi bi-box-arrow-right"></i>
+                        {% trans "Login" %}
+                    </a>
+                </li>
+            {% endif %}
+            <li class="with-bg">
+                <span>
+                    <i class="bi bi-translate"></i>
+                    {% trans "Language" %}
+                </span>
+            </li>
+            <li class="with-bg">
+                <span>
+                    <i class="bi bi-cart3"></i>
+                    {% trans "Cart" %}
+                    <div class="badge-side">
+                        6
+                    </div>
+                </span>
+            </li>
+        </ul>
     </aside>
     <div id="overlay"></div>
 </nav>

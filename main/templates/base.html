@@ -9,6 +9,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %}">
         <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <title>
             {% block title %}{% endblock title %}
@@ -17,7 +18,7 @@
 	<body>
         <header>
             {% include 'partials/navbar.html' %}
-            {% include 'partials/hero.html' %}
+            {% block hero %}{% endblock hero %}
         </header>
         <main>
             {% block content %}{% endblock content %}

@@ -1,0 +1,40 @@
+/* TODO: Delete :root here */
+:root {
+    --primary-dark:                   #00347c;
+    --primary-main:                   #004c98;
+    --primary-light:                  #8ed1f3;
+    --primary-content:                #ffffff;
+    --primary-content-low-opacity:    #ffffff38;
+
+    --secondary:                      #0fd100;
+    --secondary-content:              #ffffff;
+
+    --background-1:                   #ffffff;
+    --background-2:                   #ebf7ff;
+
+    --overlay-clr:                    #0000008c;
+
+    --clip-path: polygon(50% 0px, 100% 25%, 100% 75%, 50% 100%, 0px 75%, 0px 25%);
+
+    --font-family: 'Cairo', sans-serif;
+    --font-size: 16px;
+
+    --transition: 0.4s ease-in-out;
+    --transition-faster: 0.2s;
+
+    --border-radius: 16px;
+    --border-radius-small: 8px;
+
+    --common-shadow: 2px 2px 10px 0px #00000062;
+
+    --section-header-font-size: 50px;
+}
+
+.partners {
+    background-color: var(--primary-light);
+}
+
+.partners h2 {
+    color: var(--primary-main);
+    font-size: var(--section-header-font-size);
+}

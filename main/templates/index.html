@@ -2,11 +2,16 @@
 {% load static i18n %}
 
 {% block title %}
-    {% trans "RBMC | Rwad Bussiness Multi-Activities Company Limited" %}
+    {% trans "Alraida Academy" %}
 {% endblock title %}
+
+{% block hero %}
+    {% include 'partials/hero.html' %}
+{% endblock hero %}
 
 {% block content %}
     <section>
         Main Page (index)
+        {% include 'partials/partners.html' %}
     </section>
 {% endblock content %}
