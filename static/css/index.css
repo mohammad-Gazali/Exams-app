@@ -5,6 +5,7 @@
     --primary-light:                  #8ed1f3;
     --primary-content:                #ffffff;
     --primary-content-low-opacity:    #ffffff38;
+    --primary-light-low-opacity:      #8ed1f352;
 
     --secondary:                      #0fd100;
     --secondary-content:              #ffffff;
@@ -28,10 +29,13 @@
     --common-shadow: 2px 2px 10px 0px #00000062;
 
     --section-header-font-size: 50px;
+
+    --backdrop-filter: blur(4px);
 }
 
 .partners {
-    background-color: var(--primary-light);
+    padding: 2rem;
+    background-color: var(--primary-light-low-opacity);
 }
 
 .partners h2 {
