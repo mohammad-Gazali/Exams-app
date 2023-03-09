@@ -1,0 +1,55 @@
+.main-support {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.contact-methods-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.contact-method {
+    box-shadow: var(--common-shadow);
+    background-color: var(--background-1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    flex-grow: 1;
+    width: 30%;
+    min-width: 300px;
+}
+
+.contact-method i {
+    font-size: 62px;
+    color: var(--secondary);
+    margin-bottom: 0rem;
+}
+
+.contact-method .main-contact {
+    color: var(--primary-main);
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.contact-method .description-contact {
+    color: var(--primary-dark);
+    border-top: 2px solid;
+    padding-top: 0.5rem;
+    font-size: 16px;
+}
+
+.contact-form {
+    max-width: unset !important;
+    margin: none;
+    margin-top: 3rem !important;
+    width: 100% !important;
+}

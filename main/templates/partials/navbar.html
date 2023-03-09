@@ -143,12 +143,17 @@
             </ul>
         </li>
         <li>
-            <a href="">
+            <a href="{% url 'about_us' %}">
+                {% trans "About Us" %}
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'contact' %}">
                 {% trans "Contact" %}
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="{% url 'support' %}">
                 {% trans "Support" %}
             </a>
         </li>
@@ -325,13 +330,19 @@
             </li>
             <hr />
             <li>
-                <a href="">
+                <a href="{% url 'about_us' %}">
+                    <i class="bi bi-exclamation-circle"></i>
+                    {% trans "About Us" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'contact' %}">
                     <i class="bi bi-envelope"></i>
                     {% trans "Contact" %}
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{% url 'support' %}">
                     <i class="bi bi-question-circle"></i>
                     {% trans "Support" %}
                 </a>

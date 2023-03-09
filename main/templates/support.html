@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block title %}
+    {% trans "Support" %}
+{% endblock title %}
+
+{% block hero %}{% endblock hero %}
+
+{% block content %}
+    <main class="container main-support">
+        <section>
+            <h2 class="section-header">
+                {% trans "Common Questions" %}
+            </h2>
+            <div class="common-questions">
+                <div class="question">
+                    <div>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae eveniet et molestiae iste beatae dolorum, cum sit qui sapiente ipsam veniam rerum blanditiis ipsum nulla inventore dignissimos ut adipisci! Doloribus?
+                        </p>
+                        <i class="bi bi-caret-down"></i>
+                    </div>
+                    <div class="answer">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam repudiandae similique earum? Sunt est mollitia iure vitae quidem sapiente beatae voluptas maiores minima eum nesciunt dignissimos possimus, unde nisi et, officiis vel eius. Minima blanditiis facere totam tenetur minus veritatis, numquam nihil, nesciunt quo corporis labore exercitationem accusantium? Iste, illum. Quam vero dolorum eum dolores perspiciatis porro autem iure debitis?
+                    </div>
+                </div>
+                <div class="question">
+                    <div>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae eveniet et molestiae iste beatae dolorum, cum sit qui sapiente ipsam veniam rerum blanditiis ipsum nulla inventore dignissimos ut adipisci! Doloribus?
+                        </p>
+                        <i class="bi bi-caret-down"></i>
+                    </div>
+                    <div class="answer">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam repudiandae similique earum? Sunt est mollitia iure vitae quidem sapiente beatae voluptas maiores minima eum nesciunt dignissimos possimus, unde nisi et, officiis vel eius. Minima blanditiis facere totam tenetur minus veritatis, numquam nihil, nesciunt quo corporis labore exercitationem accusantium? Iste, illum. Quam vero dolorum eum dolores perspiciatis porro autem iure debitis?
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div>
+            <h2 class="section-header">
+                {% trans "Contact" %}
+            </h2>
+            <section class="float-section support-contact">
+                <h4 class="section-subheader">
+                    {% trans "Still Having Some Problems !" %} <i class="bi bi-emoji-frown" style="color: inherit"></i>
+                </h4>
+                <p class="section-text-content mt-2">
+                    {% trans "Don't Worry" %} <i class="bi bi-emoji-smile" style="color: inherit"></i> {% trans ", You Can" %} <a href="{% url 'contact' %}" class="clr-secondary">{% trans "Contact Us" %}</a>
+                </p>
+            </section>
+        </div>
+    </main>
+{% endblock content %}

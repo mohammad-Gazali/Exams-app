@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block title %}
+    {% trans "Contact Us" %}
+{% endblock title %}
+
+{% block hero %}{% endblock hero %}
+
+{% block content %}
+    <main class="container">
+        <h2 class="section-header">
+            {% trans "Contact Us" %}
+        </h2>
+        <section class="contact-methods-group">
+            <div class="contact-method">
+                <i class="bi bi-telephone"></i>
+                <div class="main-contact">
+                    +001122334455
+                </div>
+                <div class="description-contact">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, nostrum quia itaque sint repellat unde corporis ipsa mollitia tempora iure ea! Perferendis, accusamus quidem? Deserunt unde magnam cum quos incidunt.
+                </div>
+            </div>
+            <div class="contact-method">
+                <i class="bi bi-envelope-at"></i>
+                <div class="main-contact">
+                    contact@test.com
+                </div>
+                <div class="description-contact">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, nostrum quia itaque sint repellat unde corporis ipsa mollitia tempora iure ea! Perferendis, accusamus quidem? Deserunt unde magnam cum quos incidunt.
+                </div>
+            </div>
+            <div class="contact-method">
+                <i class="bi bi-geo-alt"></i>
+                <div class="main-contact">
+                    Test - Test - Test
+                </div>
+                <div class="description-contact">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, nostrum quia itaque sint repellat unde corporis ipsa mollitia tempora iure ea! Perferendis, accusamus quidem? Deserunt unde magnam cum quos incidunt.
+                </div>
+            </div>
+        </section>
+        <form class="float-section contact-form">
+            <h3 class="section-header">
+                {% trans "Sending Email" %}
+            </h3>
+            {% csrf_token %}
+            {% include 'common/form.html' with form=form %}
+            <button type="submit" class="submit-button">
+                <i class="bi bi-send"></i>
+                {% trans "Send" %}
+            </button>
+        </form>
+    </main>
+{% endblock content %}

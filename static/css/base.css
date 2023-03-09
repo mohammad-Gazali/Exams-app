@@ -1,25 +1,174 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800&display=swap');
+/* arabic */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/cairo-arabic-400.woff2) format('woff2');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
 
+/* latin-ext */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/cairo-latin-ext-400.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/cairo-latin-400.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* arabic */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/cairo-arabic-700.woff2) format('woff2');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+/* latin-ext */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/cairo-latin-ext-700.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/cairo-latin-700.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+/* arabic */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/cairo/v22/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscQyyS4J0.woff2) format('woff2');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+/* latin-ext */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/cairo/v22/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscSCyS4J0.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/cairo/v22/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscRiyS.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* arabic */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/cairo/v22/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscQyyS4J0.woff2) format('woff2');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+/* latin-ext */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/cairo/v22/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscSCyS4J0.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/cairo/v22/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscRiyS.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+/* arabic */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/cairo/v22/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscQyyS4J0.woff2) format('woff2');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+/* latin-ext */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/cairo/v22/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscSCyS4J0.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/cairo/v22/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscRiyS.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 :root {
-    --primary-dark:                   #00347c;
-    --primary-main:                   #004c98;
-    --primary-light:                  #8ed1f3;
-    --primary-content:                #ffffff;
-    --primary-content-low-opacity:    #ffffff38;
-    --primary-light-low-opacity:      #8ed1f352;
+    --primary-dark: #00347c;
+    --primary-main: #004c98;
+    --primary-light: #8ed1f3;
+    --primary-content: #ffffff;
+    --primary-content-low-opacity: #ffffff38;
+    --primary-light-low-opacity: #8ed1f352;
 
-    --secondary:                      #0fd100;
-    --secondary-dark:                 #0ba700;
-    --secondary-content:              #ffffff;
+    --secondary: #0fd100;
+    --secondary-dark: #0ba700;
+    --secondary-content: #ffffff;
 
-    --danger-main:                    #d32f2f;
-    --danger-light:                   #d5504e25;
+    --danger-main: #d32f2f;
+    --danger-light: #d5504e25;
 
-    --background-1:                   #ffffff;
-    --background-2:                   #ebf7ff;
+    --background-1: #ffffff;
+    --background-2: #ebf7ff;
 
-    --overlay-clr:                    #0000008c;
+    --overlay-clr: #0000008c;
 
     --clip-path: polygon(50% 0px, 100% 25%, 100% 75%, 50% 100%, 0px 75%, 0px 25%);
 
@@ -35,6 +184,7 @@
     --common-shadow: 2px 2px 10px 0px #00000062;
 
     --section-header-font-size: 50px;
+    --section-subheader-font-size: 24px;
 
     --backdrop-filter: blur(4px);
 }
@@ -56,7 +206,8 @@ body {
     width: 100%;
 }
 
-button, .button {
+button,
+.button {
     border: none;
     text-decoration: none;
     background-color: var(--primary-main);
@@ -72,8 +223,15 @@ button, .button {
     gap: 0.5rem;
 }
 
-button:hover, .button:hover {
+
+button:hover,
+.button:hover {
     background-color: var(--primary-dark);
+}
+
+button.bg-secondary:hover,
+.button.bg-secondary:hover {
+    background-color: var(--secondary-dark);
 }
 
 button:focus,
@@ -83,7 +241,8 @@ button:active,
     border: none;
 }
 
-input {
+input,
+textarea {
     border: none;
     color: var(--primary-main);
     padding: 0.5rem 0.5rem;
@@ -91,8 +250,14 @@ input {
 }
 
 input:focus,
-input:active {
+input:active,
+textarea:focus,
+textarea:active {
     outline: none;
+}
+
+textarea {
+    resize: none;
 }
 
 
@@ -265,8 +430,10 @@ nav #side-navbar .side-links .dropdown-side .dropdown-text-side {
 nav #side-navbar .side-links .dropdown-side .dropdown-list-side {
     display: flex;
     flex-direction: column;
+    background-color: var(--primary-main);
     gap: 0.5rem;
     list-style: none;
+    width: 100%;
     max-height: 0;
     overflow: hidden;
     position: relative;
@@ -276,7 +443,6 @@ nav #side-navbar .side-links .dropdown-side .dropdown-list-side {
 nav #side-navbar .side-links .dropdown-side.active .dropdown-list-side {
     max-height: 100%;
     margin-bottom: 1rem;
-    width: 100%;
 }
 
 nav #side-navbar .side-links .dropdown-side .dropdown-list-side * {
@@ -287,10 +453,11 @@ nav #side-navbar .side-links .dropdown-side .dropdown-list-side * {
 
 @media (max-width: 900px) {
     nav .links {
-        display: none;   
+        display: none;
     }
 
-    nav #mobile-toggle, nav #mobile-toggle-close {
+    nav #mobile-toggle,
+    nav #mobile-toggle-close {
         display: flex;
         background-color: transparent;
         font-size: 30px;
@@ -312,7 +479,8 @@ nav #side-navbar .side-links .dropdown-side .dropdown-list-side * {
         margin-right: auto;
     }
 
-    nav #mobile-toggle:active, nav #mobile-toggle-close:active {
+    nav #mobile-toggle:active,
+    nav #mobile-toggle-close:active {
         box-shadow: 0px 0px 0px 10px var(--primary-content);
     }
 
@@ -439,7 +607,7 @@ nav #side-navbar .side-links .dropdown-side .dropdown-list-side * {
         flex-grow: 1;
         min-width: 200px;
     }
-    
+
     .hero .search form button {
         flex-grow: 1;
     }
@@ -682,6 +850,7 @@ footer #copy-right {
 
 .hover-dropdown:hover .dropdown-list * {
     display: flex;
+    font-size: 14px;
     transform: scale(1);
 }
 
@@ -726,6 +895,11 @@ footer #copy-right {
     font-size: var(--section-header-font-size);
 }
 
+.section-subheader {
+    color: var(--primary-main);
+    font-size: var(--section-subheader-font-size);
+}
+
 .section-text-content {
     color: var(--primary-dark);
 }
@@ -741,6 +915,12 @@ footer #copy-right {
     margin-top: 2rem;
 }
 
+.full-float-section {
+    max-width: unset !important;
+    margin: none !important;
+    width: 100% !important;
+}
+
 .label-field-group {
     display: flex;
     flex-direction: column;
@@ -751,10 +931,11 @@ footer #copy-right {
 }
 
 .label-field-group * {
-    color: var(--primary-dark);   
+    color: var(--primary-dark);
 }
 
-.label-field-group input {
+.label-field-group input,
+.label-field-group textarea {
     border: 1px solid var(--primary-dark);
     background-color: var(--background-2);
 }
@@ -873,4 +1054,36 @@ footer #copy-right {
 
 .mt-2 {
     margin-top: 1rem;
+}
+
+.clr-primary {
+    color: var(--primary-main);
+}
+
+.clr-secondary {
+    color: var(--secondary);
+}
+
+.clr-danger {
+    color: var(--danger-main);
+}
+
+.bg-primary {
+    background-color: var(--primary-main);
+}
+
+.bg-secondary {
+    background-color: var(--secondary);
+}
+
+.bg-danger {
+    background-color: var(--danger-main);
+}
+
+.w-fit {
+    width: fit-content;
+}
+
+.d-inline {
+    display: inline-block;
 }
