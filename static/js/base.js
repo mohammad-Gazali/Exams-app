@@ -69,7 +69,7 @@ dropdownSidebar.forEach((dropdown) => {
 //? Helper Functions
 
 function navbarBackground() {
-    if (window.scrollY === 0) {
+    if (window.scrollY === 0 && location.pathname === "/") {
         navbar.style.setProperty('--nav-bg', 'transparent');
     } else {
         navbar.style.setProperty('--nav-bg', 'var(--overlay-clr)');

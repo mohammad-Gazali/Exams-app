@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block title %}
+    {% trans "Failed Vertification" %}
+{% endblock title %}
+
+{% block hero %}{% endblock hero %}
+
+{% block content %}
+    <main class="float-section">
+        <h2 class="section-header" style="color: var(--danger-main) !important">
+            {% trans "Failed Vertification" %}
+        </h2>
+        <p class="section-text-content" style="color: var(--danger-main) !important">
+            {{ msg }}
+        </p>
+    </main>
+{% endblock content %}

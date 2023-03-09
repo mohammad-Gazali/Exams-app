@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block title %}
+    {% trans "Success Vertification" %}
+{% endblock title %}
+
+{% block hero %}{% endblock hero %}
+
+{% block content %}
+    <main class="float-section">
+        <h2 class="section-header" style="color: var(--secondary) !important">
+            {% trans "Success Vertification" %}
+        </h2>
+        <p class="section-text-content" style="color: var(--secondary-dark) !important">
+            {% trans "Thank You, Your Vertification Has Successed" %}
+        </p>
+        <a href="{{ link }}" class="button mt-2">
+            {% trans "Continue To Login Page" %}
+        </a>
+    </main>
+{% endblock content %}

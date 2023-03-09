@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block title %}
+    {% trans "Profile" %}
+{% endblock title %}
+
+{% block base_hero %}{% endblock base_hero %}
+
+{% block content %}
+    <main class="px-10 mt-10">
+        <h2 class="text-4xl text-primary font-bold">
+            {% trans "Profile" %}
+        </h2>
+        <!-- big screens -->
+        <ul class="menu dark:shadow-none bg-base-300 shadow-xl w-full max-w-2xl p-2 mt-5 rounded-box sm:flex hidden">
+            {% if user.first_name %}
+                <li>
+                    <a>
+                        <span class="font-bold ltr:w-28 rtl:w-32 ltr:border-r-2 rtl:border-l-2 border-primary text-center">
+                            {% trans "First Name" %}
+                        </span>{{ user.first_name }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if user.last_name %}
+                <li>
+                    <a>
+                        <span class="font-bold ltr:w-28 rtl:w-32 ltr:border-r-2 rtl:border-l-2 border-primary text-center">
+                            {% trans "Last Name" %}
+                        </span>{{ user.last_name }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if user.username %}
+                <li>
+                    <a>
+                        <span class="font-bold ltr:w-28 rtl:w-32 ltr:border-r-2 rtl:border-l-2 border-primary text-center">
+                            {% trans "Username" %}
+                        </span>{{ user.username }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if user.email %}
+                <li>
+                    <a>
+                        <span class="font-bold ltr:w-28 rtl:w-32 ltr:border-r-2 rtl:border-l-2 border-primary text-center">
+                            {% trans "Email" %}
+                        </span>{{ user.email }}
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+        <!-- small screens -->
+        <div class="overflow-x-auto my-table-scrollbar">
+            <table class="sm:hidden table w-full border-[1px] dark:border-white/20">
+                <tbody>
+                    {% if user.first_name %}
+                        <tr class="dark:border-white/20 border-y-[1px]">
+                            <th class="ltr:border-r-2 rtl:border-l-2 bg-base-300 border-x-primary dark:border-y-white/20 text-center" style="position: relative;">{% trans "First Name" %}</th>
+                            <td class="dark:border-y-white/20 bg-base-300">{{ user.first_name }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if user.last_name %}
+                        <tr class="dark:border-white/20 border-y-[1px]">
+                            <th class="dark:border-y-white/20 ltr:border-r-2 rtl:border-l-2 border-x-primary text-center" style="position: relative;">{% trans "Last Name" %}</th>
+                            <td class="dark:border-y-white/20">{{ user.last_name }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if user.username %}
+                        <tr class="dark:border-white/20 border-y-[1px]">
+                            <th class="dark:border-y-white/20 bg-base-300 ltr:border-r-2 rtl:border-l-2 border-x-primary text-center" style="position: relative;">{% trans "Username" %}</th>
+                            <td class="dark:border-y-white/20 bg-base-300">{{ user.username }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if user.email %}
+                        <tr class="dark:border-white/20 border-y-[1px]">
+                            <th class="dark:border-y-white/20 ltr:border-r-2 rtl:border-l-2 border-x-primary text-center" style="position: relative;">{% trans "Email" %}</th>
+                            <td class="dark:border-y-white/20">{{ user.email }}</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock content %}

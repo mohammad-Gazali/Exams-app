@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Verify Your Account" %}
+{% endblock title %}
+
+{% block hero %}{% endblock hero %}
+
+
+{% block content %}
+    <main class="float-section">
+        <h2 class="section-header">
+            {% trans "Verify Your Email" %}
+        </h2>
+        <p class="section-text-content">
+            {% trans "You Have Recieved An Email For Vertification In" %} {{ email }}, {% trans "Please Go To Your Inbox For Verifying Your Account." %}
+        </p>
+    </main>
+{% endblock content %}

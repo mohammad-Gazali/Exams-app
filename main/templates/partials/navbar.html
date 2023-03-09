@@ -2,7 +2,7 @@
 
 <nav class="container">
     <h1>
-        <a href="">
+        <a href="{% url 'home' %}">
             {% trans "Alraida Academy" %}
         </a>
     </h1>
@@ -154,13 +154,13 @@
         </li>
         {% if user.is_authenticated %}
             <li>
-                <a href="">
+                <a href="{% url 'logout' %}">
                     {% trans "Logout" %}
                 </a>
             </li>
         {% else %}
             <li>
-                <a href="">
+                <a href="{% url 'login' %}">
                     {% trans "Login" %}
                 </a>
             </li>
@@ -338,14 +338,14 @@
             </li>
             {% if user.is_authenticated %}
                 <li>
-                    <a href="">
+                    <a href="{% url 'logout' %}">
                         <i class="bi bi-box-arrow-left"></i>
                         {% trans "Logout" %}
                     </a>
                 </li>
             {% else %}
                 <li>
-                    <a href="">
+                    <a href="{% url 'login' %}">
                         <i class="bi bi-box-arrow-right"></i>
                         {% trans "Login" %}
                     </a>
