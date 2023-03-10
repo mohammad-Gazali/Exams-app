@@ -451,7 +451,7 @@ nav #side-navbar .side-links .dropdown-side .dropdown-list-side * {
 }
 
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     nav .links {
         display: none;
     }
@@ -792,7 +792,7 @@ footer #copy-right {
     padding-left: 3rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .container {
         padding-right: 1.5rem;
         padding-left: 1.5rem;
