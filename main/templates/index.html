@@ -10,8 +10,8 @@
 {% endblock hero %}
 
 {% block content %}
-    <section>
-        Main Page (index)
+    <section class="main-section">
+        {% include 'partials/index_sections.html' %}
         {% include 'partials/partners.html' %}
     </section>
 {% endblock content %}

@@ -155,6 +155,7 @@
     --primary-main: #004c98;
     --primary-light: #8ed1f3;
     --primary-content: #ffffff;
+    --primary-light-content: #002963;
     --primary-content-low-opacity: #ffffff38;
     --primary-light-low-opacity: #8ed1f352;
 
@@ -618,7 +619,7 @@ nav #side-navbar .side-links .dropdown-side .dropdown-list-side * {
 /*| main start */
 
 main {
-    margin: 6rem 0;
+    margin: 3rem 0;
 }
 
 /** main end */
@@ -1068,8 +1069,20 @@ footer #copy-right {
     color: var(--danger-main);
 }
 
+.clr-primary-light-content {
+    color: var(--primary-light-content)
+}
+
+.clr-primary-content {
+    color: var(--primary-content)
+}
+
 .bg-primary {
     background-color: var(--primary-main);
+}
+
+.bg-primary-light {
+    background-color: var(--primary-light);
 }
 
 .bg-secondary {

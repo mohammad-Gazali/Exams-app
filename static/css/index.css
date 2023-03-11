@@ -1,5 +1,65 @@
-.partners {
-    padding: 2rem;
+.main-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.full-section {
+    padding: 2rem 0;
     background-color: var(--background-1);
     box-shadow: var(--common-shadow);
+}
+
+#services-wrapper {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.service {
+    background-color: var(--primary-main);
+    box-shadow: var(--common-shadow);
+    border-radius: var(--border-radius);
+    height: 18rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.service h3 {
+    color: var(--primary-content);
+    font-size: 1.7rem;
+}
+
+.service .hover-service {
+    position: absolute;
+    inset: 0;
+    background-color: var(--primary-content);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.service .hover-service p {
+    flex-grow: 1;
+    white-space: normal !important;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+.service:hover .hover-service {
+    opacity: 100;
+    visibility: visible;
+    pointer-events: unset;
 }
