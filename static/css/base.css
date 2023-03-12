@@ -620,6 +620,12 @@ nav #side-navbar .side-links .dropdown-side .dropdown-list-side * {
 
 main {
     margin: 3rem 0;
+    margin-top: 6rem;
+}
+
+main.index-page {
+    margin-top: 0;
+    margin: 3rem 0;
 }
 
 /** main end */

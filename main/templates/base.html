@@ -12,89 +12,29 @@
 		<link rel="stylesheet" href="{% static 'css/contact.css' %}" />
 		<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 		<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+		
+		<!-- Sweet Alert 2 -->
+		<script src="{% static 'js/sweetalert2.js' %}"></script>
+
 		<title>{% block title %}{% endblock title %}</title>
 	</head>
 	<body>
 		<header>
 			{% include 'partials/navbar.html' %} {% block hero %}{% endblock hero %}
 		</header>
-		<main>{% block content %}{% endblock content %}</main>
+
+		<main {% if request.path == "/" %}class="index-page"{% endif %}>
+			{% block content %}{% endblock content %}
+		</main>
+
 		{% include 'partials/footer.html' %}
-		<script src="{% static 'js/swiper.min.js' %}"></script>
+
+		<!-- Pages Javascript -->
 		<script src="{% static 'js/support.js' %}"></script>
 		<script src="{% static 'js/base.js' %}"></script>
-		<!-- Slider -->
-		<script>
-			const swiper = new Swiper(".swiper", {
-				autoplay: {
-					delay: 2000,
-					disableOnInteraction: false,
-					pauseOnMouseEnter: true
-				},
-				speed: 800,
-				breakpoints: {
-					// when window width is >= 320px
-					320: {
-						slidesPerView: 1,
-						spaceBetween: 20,
-					},
-					// when window width is >= 480px
-					480: {
-						slidesPerView: 2,
-						spaceBetween: 30,
-					},
-					// when window width is >= 640px
-					640: {
-						slidesPerView: 3,
-						spaceBetween: 40,
-					},
-                    820: {
-                        slidesPerView: 4,
-						spaceBetween: 40,
-                    },
-					1000: {
-						slidesPerView: 5,
-						spaceBetween: 50,
-					},
-				},
-			})
-
-			const swiper2 = new Swiper(".swiper-2", {
-				navigation: {
-					nextEl: '.swiper-button-next',
-					prevEl: '.swiper-button-prev',
-				},
-				autoplay: {
-					delay: 3000,
-					pauseOnMouseEnter: true,
-				},
-				speed: 800,
-				breakpoints: {
-					// when window width is >= 320px
-					320: {
-						slidesPerView: 1,
-						spaceBetween: 20,
-					},
-					// when window width is >= 480px
-					480: {
-						slidesPerView: 2,
-						spaceBetween: 30,
-					},
-					// when window width is >= 640px
-					640: {
-						slidesPerView: 3,
-						spaceBetween: 40,
-					},
-                    820: {
-                        slidesPerView: 4,
-						spaceBetween: 40,
-                    },
-					1000: {
-						slidesPerView: 5,
-						spaceBetween: 50,
-					},
-				},
-			})
-		</script>
+		<!-- Swiper (Slider) -->
+		<script src="{% static 'js/swiper.min.js' %}"></script>
+		<!-- Sliders -->
+		<script src="{% static 'js/sliders.js' %}"></script>
 	</body>
 </html>

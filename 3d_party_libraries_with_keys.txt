@@ -1,0 +1,4 @@
+These Are The Libraries That Should be Treated In The Production Mode For This Project
+
+- google OAuth
+- google reCAPTCHA (version 2)

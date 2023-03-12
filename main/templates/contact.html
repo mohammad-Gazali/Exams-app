@@ -9,6 +9,17 @@
 {% block hero %}{% endblock hero %}
 
 {% block content %}
+    {% if sended %}
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{% trans "Successful Sending" %}',
+                text: '{% trans "Thank You For Your Email. We Will Reply To This Email As Soon As Possible" %}',
+                confirmButtonText: '{% trans "OK" %}',
+                confirmButtonColor: '#004c98',
+            })
+        </script>
+    {% endif %}
     <section class="container">
         <h2 class="section-header">
             {% trans "Contact Us" %}
@@ -42,7 +53,7 @@
                 </div>
             </div>
         </section>
-        <form class="float-section contact-form">
+        <form action="{% url 'contact' %}" method="POST" class="float-section contact-form">
             <h3 class="section-header">
                 {% trans "Sending Email" %}
             </h3>

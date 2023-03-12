@@ -35,7 +35,11 @@ INSTALLED_APPS = [
     # for authentication with google
     'django.contrib.sites', 
 
-    # 3rd party libraries
+
+    #* ====== 3rd party libraries =======
+
+
+    # all auth for google authentication
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -43,6 +47,9 @@ INSTALLED_APPS = [
 
     # verifying emails
     "verify_email.apps.VerifyEmailConfig",
+
+    # for google recaptcha protection
+    "captcha",
 ]
 
 MIDDLEWARE = [
@@ -191,12 +198,20 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = os.environ.get('EMAIL_ID') 
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PW')
-
 DEFAULT_FROM_EMAIL = 'no_reply@test.com'
 
+
+CONTACT_EMAIL = 'contact@test.com'  #? This My Custom Constant
 
 
 # for email vertification
 VERIFICATION_SUCCESS_TEMPLATE = "registration/success.html"
 
 VERIFICATION_FAILED_TEMPLATE = "registration/failed.html"
+
+
+
+# for recaptcha
+RECAPTCHA_PUBLIC_KEY = '6LdSKPUkAAAAAD1LFMX85P-spSKo7CYGurT3zMV0'
+RECAPTCHA_PRIVATE_KEY = '6LdSKPUkAAAAAL2Jb6Ht8BZl37HvM5UtKDE6aMzZ'
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

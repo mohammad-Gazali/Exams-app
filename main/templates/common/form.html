@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <ul class="errors-group">
     {% for error in form.non_field_errors %}
         <li class="form-error">
@@ -8,22 +10,36 @@
     {% endfor %}
     {% for field in form %}
         {% for error in field.errors %}
-        <li class="form-error">
-            <div>
-                <span>{{ error|escape }}</span>
-            </div>
-        </li>
+        {% if field.label == "Captcha" and error == "This field is required." %}
+            <li class="form-error">
+                <div>
+                    <span>{% trans "You must pass the reCAPTCHA test" %}</span>
+                </div>
+            </li>
+        {% else %}
+            <li class="form-error">
+                <div>
+                    <span>{{ error|escape }}</span>
+                </div>
+            </li>
+        {% endif %}
         {% endfor %}
     {% endfor %}
 </ul>
 
 {% for field in form %}
+    {% if field.label == "Captcha" %}
     <div class="label-field-group">
-        {% if field.field.required %}
-            <label class="label"> {{ field.label }} * </label>
-        {% else %}
-            <label class="label"> {{ field.label }} </label>
-        {% endif %}
         {{ field }}
     </div>
+    {% else %}
+        <div class="label-field-group">
+            {% if field.field.required %}
+                <label class="label"> {{ field.label }} * </label>
+            {% else %}
+                <label class="label"> {{ field.label }} </label>
+            {% endif %}
+            {{ field }}
+        </div>
+    {% endif %}
 {% endfor %}

@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import gettext_lazy as _
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 
 attrs = {"class": "login-field"}
@@ -21,6 +23,7 @@ class LoginCustomForm(AuthenticationForm):
         widget=forms.PasswordInput(attrs=attrs)
     )
 
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
 
 class SignUpCustomForm(UserCreationForm):
@@ -57,6 +60,8 @@ class SignUpCustomForm(UserCreationForm):
         strip=False,
         widget=forms.PasswordInput(attrs=attrs)
     )
+
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
     class Meta(UserCreationForm.Meta):
         fields = ['first_name', 'last_name', 'username', 'email']
