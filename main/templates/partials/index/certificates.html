@@ -1,0 +1,31 @@
+{% load i18n static %}
+
+
+<section class="container p-relative">
+    <h2 class="section-header">
+        {% trans "Certificates" %}
+    </h2>
+    <div class="swiper-3">
+        <ul id="certificates-wrapper" class="swiper-wrapper">
+            {% for _ in "123123123123123123123113"|make_list %}
+                <li class="swiper-slide certificate">
+                    <div class="certificate-header">
+                        <h3 class="clr-primary">
+                            CMA
+                        </h3>
+                        <img src="{% static 'imgs/general/small_certificate.svg' %}" alt="certificate">
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius tempora eligendi odio, consequatur cumque quasi, maiores sunt omnis eaque ab perferendis nesciunt animi maxime laborum at! Incidunt tempore itaque sed tempora assumenda expedita, maiores nostrum quam debitis explicabo, fugit hic in sequi mollitia praesentium non, et quaerat aliquam! Exercitationem facilis perspiciatis, aspernatur in, fugit commodi repellendus obcaecati pariatur, beatae sit impedit quae deleniti autem quisquam necessitatibus. Quibusdam cum laboriosam pariatur!
+                    </p>
+                    <a href="" class="clr-secondary">
+                        {% trans "More Details" %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination down-pagination"></div>
+    </div>
+</section>

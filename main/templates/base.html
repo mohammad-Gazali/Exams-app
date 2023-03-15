@@ -6,6 +6,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		{% comment %} TODO: Adding meta tags for SEO  {% endcomment %}
 		<link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %}" />
 		<link rel="stylesheet" href="{% static 'css/swiper.min.css' %}" />
 		<link rel="stylesheet" href="{% static 'css/support.css' %}" />
@@ -16,6 +17,9 @@
 		<!-- Sweet Alert 2 -->
 		<script src="{% static 'js/sweetalert2.js' %}"></script>
 
+		<!-- lottie player -->
+		<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+		
 		<title>{% block title %}{% endblock title %}</title>
 	</head>
 	<body>

@@ -1,0 +1,18 @@
+{% load static i18n %}
+
+
+<section class="container p-relative">
+    <h2 class="section-header">
+        {% trans "Courses" %}
+    </h2>
+    <ul id="courses-wrapper">
+        {% for _ in "12312312312312312312311"|make_list %}
+            <a href="" class="course">
+                <h3 class="clr-primary">
+                    {% trans "Electronic accounting course" %}
+                </h3>
+                <img src="http://via.placeholder.com/360x225" alt="">
+            </a>
+        {% endfor %}
+    </ul>
+</section>

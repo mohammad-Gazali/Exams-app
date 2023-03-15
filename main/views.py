@@ -46,7 +46,7 @@ def contact(request: HttpRequest):
                     subject=subject,
                     html_message=msg_html,
                     message=msg_html,
-                    from_email=request.user.email,
+                    from_email=request.user.email, # type: ignore
                     recipient_list= [settings.CONTACT_EMAIL]
                 )
 

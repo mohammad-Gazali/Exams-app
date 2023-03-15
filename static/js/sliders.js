@@ -1,4 +1,9 @@
 const swiper = new Swiper(".swiper", {
+	pagination: {
+		el: ".swiper-pagination",
+		type: "bullets",
+		clickable: true,
+	},
 	autoplay: {
 		delay: 2000,
 		disableOnInteraction: false,
@@ -6,17 +11,14 @@ const swiper = new Swiper(".swiper", {
 	},
 	speed: 800,
 	breakpoints: {
-		// when window width is >= 320px
 		320: {
 			slidesPerView: 1,
 			spaceBetween: 20,
 		},
-		// when window width is >= 480px
 		480: {
 			slidesPerView: 2,
 			spaceBetween: 30,
 		},
-		// when window width is >= 640px
 		640: {
 			slidesPerView: 3,
 			spaceBetween: 40,
@@ -33,6 +35,11 @@ const swiper = new Swiper(".swiper", {
 });
 
 const swiper2 = new Swiper(".swiper-2", {
+	pagination: {
+		el: ".swiper-pagination",
+		type: "bullets",
+		clickable: true,
+	},
 	navigation: {
 		nextEl: ".swiper-button-next",
 		prevEl: ".swiper-button-prev",
@@ -43,28 +50,56 @@ const swiper2 = new Swiper(".swiper-2", {
 	},
 	speed: 800,
 	breakpoints: {
-		// when window width is >= 320px
 		320: {
 			slidesPerView: 1,
 			spaceBetween: 20,
 		},
-		// when window width is >= 480px
 		480: {
 			slidesPerView: 2,
 			spaceBetween: 30,
 		},
-		// when window width is >= 640px
 		640: {
 			slidesPerView: 3,
 			spaceBetween: 40,
 		},
-		820: {
+		900: {
 			slidesPerView: 4,
 			spaceBetween: 40,
 		},
-		1000: {
+		1200: {
 			slidesPerView: 5,
 			spaceBetween: 50,
+		},
+	},
+});
+
+const swiper3 = new Swiper(".swiper-3", {
+	pagination: {
+		el: ".swiper-pagination",
+		type: "bullets",
+		clickable: true,
+	},
+	navigation: {
+		nextEl: ".swiper-button-next",
+		prevEl: ".swiper-button-prev",
+	},
+	speed: 800,
+	breakpoints: {
+		320: {
+			slidesPerView: 1,
+			spaceBetween: 20,
+		},
+		520: {
+			slidesPerView: 2,
+			spaceBetween: 30,
+		},
+		940: {
+			slidesPerView: 3,
+			spaceBetween: 40,
+		},
+		1200: {
+			slidesPerView: 4,
+			spaceBetween: 40,
 		},
 	},
 });

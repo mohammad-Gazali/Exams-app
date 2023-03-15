@@ -6,12 +6,16 @@
 {% endblock title %}
 
 {% block hero %}
-    {% include 'partials/hero.html' %}
+    {% include 'partials/index/hero.html' %}
 {% endblock hero %}
 
 {% block content %}
     <section class="main-section">
-        {% include 'partials/index_sections.html' %}
-        {% include 'partials/partners.html' %}
+        {% include 'partials/index/index_sections.html' %}
+        {% include 'partials/index/courses.html' %}
+        {% include 'partials/index/consulting.html' %}
+        {% include 'partials/index/exams.html' %}
+        {% include 'partials/index/certificates.html' %}
+        {% include 'partials/index/partners.html' %}
     </section>
 {% endblock content %}
