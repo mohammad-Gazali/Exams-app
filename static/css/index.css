@@ -154,14 +154,15 @@
 .course h3 {
     padding: 1rem;
     font-size: 26px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     text-transform: capitalize;
 }
 
 .course img {
-    width: 100%;
-    height: auto;
+    width: auto;
     object-fit: cover;
-    object-position: center;
 }
 
 #consulting-services-wrapper {
@@ -222,7 +223,7 @@
     font-size: 1.3rem;
 }
 
-.consulting-service p {
+.consulting-service p { 
     color: var(--primary-content);
     font-size: 1.2rem;
     font-weight: 700;
@@ -232,4 +233,117 @@
     width: 30px;
     height: auto;
     fill: var(--secondary);
+}
+
+.exams-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#exams-service-wrapper {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    max-width: 950px;
+}
+
+@media (max-width: 700px) {
+    .exams-container {
+        flex-direction: column;
+    }
+}
+
+.exam-card {
+    background-color: var(--background-1);
+    color: var(--primary-main);
+    box-shadow: var(--common-shadow);
+    border-radius: var(--border-radius);
+    width: 160px;
+    min-height: 80px;
+    padding: 0.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.exam-card .on-hover-serface-exam {
+    position: absolute;
+    inset: 0;
+    background: var(--secondary-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: var(--transition-faster);
+    border-radius: var(--border-radius);
+}
+
+.exam-card:hover .on-hover-serface-exam {
+    opacity: 100;
+    pointer-events: unset;
+    visibility: visible;
+}
+
+.exam-animation {
+    width: 400px;
+}
+
+.more-exams-btn {
+    width: fit-content;
+    margin: auto;
+    font-size: 20px !important;
+    padding: 0.4rem 1rem !important;
+}
+
+@media (max-width: 1000px) {
+    .exam-card:nth-of-type(8) {
+        display: none;
+    }
+
+    .exam-card:nth-of-type(7) {
+        display: none;
+    }
+
+    .exam-animation {
+        width: 300px;
+    }
+
+    #exams-service-wrapper {
+        max-width: 650px;
+    }
+}
+
+@media (max-width: 800px) {
+    .exam-card:nth-of-type(6) {
+        display: none;
+    }
+
+    .exam-card:nth-of-type(5) {
+        display: none;
+    }
+
+    #exams-service-wrapper {
+        max-width: 450px;
+    }
+
+    .exam-animation {
+        width: 300px
+    }
+}
+
+@media (max-width: 400px) {
+    .exam-card {
+        flex-grow: 1;
+    }
 }

@@ -5,12 +5,24 @@
     <h2 class="section-header">
         {% trans "Exams" %}
     </h2>
-    <div>
-        <lottie-player src="{% static 'json/exam.json' %}"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop autoplay></lottie-player>
+    <div class="exams-container">
+        <lottie-player src="{% static 'json/exam.json' %}" class="exam-animation"  background="transparent"  speed="1"  loop autoplay></lottie-player>
         <div>
             <ul id="exams-service-wrapper">
-    
+                {% for _ in "12312312"|make_list %}
+                    <li class="exam-card">
+                        Test Test Test Test
+                        <div class="on-hover-serface-exam">
+                           <a href="" class="button">
+                            {% trans "Take The Exam" %}
+                           </a> 
+                        </div>
+                    </li>
+                {% endfor %}
             </ul>
+            <a href="" class="button bg-secondary more-exams-btn">
+                {% trans "More Exams" %}
+            </a>
         </div>
     </div>
 </section>

@@ -558,12 +558,19 @@ nav #side-navbar .side-links .dropdown-side .dropdown-list-side * {
 .hero .main-row #intro-text h2 {
     font-size: 40px;
     line-height: 3rem;
+    margin-top: 4rem;
 }
 
 .hero .main-row #intro-text p {
     margin-top: 1rem;
     font-size: 20px;
     line-height: 2.3rem;
+}
+
+@media (max-width: 400px) {
+    .hero .main-row #intro-text p {
+        display: none;
+    }
 }
 
 .hero .search {
@@ -608,6 +615,7 @@ nav #side-navbar .side-links .dropdown-side .dropdown-list-side * {
 }
 
 @media (max-width: 500px) {
+
     .hero .search form input[type="text"] {
         flex-grow: 1;
         min-width: 200px;
@@ -1125,6 +1133,10 @@ footer #copy-right {
     }
 
     .swiper-button-next {
+        display: none !important;
+    }
+
+    .hide-small {
         display: none !important;
     }
 }
