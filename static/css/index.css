@@ -347,3 +347,36 @@
         flex-grow: 1;
     }
 }
+
+/* overriding display of partners, services and certificates swiper slide */
+.swiper .swiper-slide,
+.swiper-2 .swiper-slide, 
+.swiper-3 .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.swiper .swiper-slide img,
+.swiper-2 .swiper-slide img,
+.swiper-3 .swiper-slide img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--border-radius-small);
+}
+
+.swiper .swiper-slide p,
+.swiper-2 .swiper-slide p,
+.swiper-3 .swiper-slide p {
+    text-align: center;
+    color: var(--primary-dark);
+    font-weight: 700;
+    cursor: default;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 150px;
+}
