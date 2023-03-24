@@ -31,6 +31,9 @@ INSTALLED_APPS = [
     # my apps
     'main.apps.MainConfig',
     'accounts.apps.AccountsConfig',
+    'exams.apps.ExamsConfig',
+    'courses.apps.CoursesConfig',
+    'blog.apps.BlogConfig',
 
     # for authentication with google
     'django.contrib.sites', 
@@ -50,6 +53,12 @@ INSTALLED_APPS = [
 
     # for google recaptcha protection
     "captcha",
+
+    # for rich text editor
+    "ckeditor",
+
+    # for phone number field
+    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
@@ -215,3 +224,34 @@ VERIFICATION_FAILED_TEMPLATE = "registration/failed.html"
 RECAPTCHA_PUBLIC_KEY = '6LdSKPUkAAAAAD1LFMX85P-spSKo7CYGurT3zMV0'
 RECAPTCHA_PRIVATE_KEY = '6LdSKPUkAAAAAL2Jb6Ht8BZl37HvM5UtKDE6aMzZ'
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+
+# for ckeditor package
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+
+# CKEDITOR_CONFIGS = {
+#     'awesome_ckeditor': {
+#         'toolbar': 'Basic',
+#     },
+# }
+
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'full',
+#         'height': 300,
+#         'width': 300,
+#     },
+# }
+
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'Custom',
+#         'toolbar_Custom': [
+#             ['Bold', 'Italic', 'Underline'],
+#             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+#             ['Link', 'Unlink'],
+#             ['RemoveFormat', 'Source']
+#         ]
+#     }
+# }

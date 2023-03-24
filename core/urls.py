@@ -18,6 +18,9 @@ urlpatterns = [
 
     # for email vertification
     path('verification/', include('verify_email.urls')),
+
+    # for ckeditor uploading images
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:
