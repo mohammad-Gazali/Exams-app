@@ -7,14 +7,14 @@ import uuid
 
 
 
-class GenderChoices(models.IntegerChoices):
-    MALE = 1, _("male")
-    FAMALE = 2, _("famale")
+class GenderChoices(models.TextChoices):
+    MALE = "MALE", _("male")
+    FAMALE = "FAMALE", _("famale")
 
 
 class NormalUser(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    gender = models.IntegerField(choices=GenderChoices.choices, verbose_name=_("gender"))
+    gender = models.CharField(max_length=6, choices=GenderChoices.choices, verbose_name=_("gender"))
     nationality = models.CharField(max_length=127, verbose_name=_("nationality"))
     birthdate = models.DateField(verbose_name=_("birthdate"))
     phone_number = PhoneNumberField()
@@ -28,7 +28,7 @@ class NormalUser(models.Model):
 
 class Teacher(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    gender = models.IntegerField(choices=GenderChoices.choices, verbose_name=_("gender"))
+    gender = models.CharField(max_length=6, choices=GenderChoices.choices, verbose_name=_("gender"))
     nationality = models.CharField(max_length=127, verbose_name=_("nationality"))
     birthdate = models.DateField(verbose_name=_("birthdate"))
     phone_number = PhoneNumberField()
