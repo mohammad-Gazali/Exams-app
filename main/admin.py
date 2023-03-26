@@ -1,3 +1,7 @@
 from django.contrib import admin
+from main.models import NormalUser
 
-# Register your models here.
+
+@admin.register(NormalUser)
+class NormalUserAdmin(admin.ModelAdmin):
+    pass

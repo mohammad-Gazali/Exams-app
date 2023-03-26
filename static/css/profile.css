@@ -1,0 +1,93 @@
+.welcome-header {
+    color: var(--primary-main);
+    font-size: var(--welcome-header-font-size);
+    line-height: 66px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.personal-information-content {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 850px) {
+    .personal-information-content {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.image-and-account-type {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 300px;
+}
+
+.image-and-account-type .personal-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--border-radius-small);
+}
+
+.image-and-account-type div {
+    background-color: var(--primary-light);
+    color: var(--primary-main);
+    padding: 0.5rem;
+    border-radius: var(--border-radius-small);
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.personal-information-content table {
+    flex-grow: 1;
+    width: 100%;
+    border-spacing: 0;
+    border-radius: var(--border-radius-small);
+    overflow: hidden;
+}
+
+.personal-information-content table tr:nth-child(odd) {
+    background-color: var(--primary-dark);
+}
+
+.personal-information-content table tr:nth-child(even) {
+    background-color: var(--primary-main);
+}
+
+.personal-information-content table * {
+    color: var(--primary-content);
+}
+
+.personal-information-content table th {
+    text-align: start;
+}
+
+.personal-information-content table td {
+    border-left: 2px solid var(--primary-light);
+}
+
+.personal-information-content table td.rtl {
+    border-left: 0;
+    border-right: 2px solid var(--primary-light);
+}
+
+.personal-information-content table tr * {
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.personal-information-content table tr .rtl {
+    padding-left: 0;
+    padding-right: 0.5rem;
+}

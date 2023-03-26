@@ -50,7 +50,7 @@ const swiper2 = new Swiper(".swiper-2", {
 	},
 	speed: 800,
 	breakpoints: {
-		320: {
+		0: {
 			slidesPerView: 1,
 			spaceBetween: 20,
 		},
@@ -85,7 +85,7 @@ const swiper3 = new Swiper(".swiper-3", {
 	},
 	speed: 800,
 	breakpoints: {
-		320: {
+		0: {
 			slidesPerView: 1,
 			spaceBetween: 20,
 		},

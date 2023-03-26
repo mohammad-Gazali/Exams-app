@@ -5,8 +5,6 @@ from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
 
-attrs = {"class": "login-field"}
-
 
 class LoginCustomForm(AuthenticationForm):
 
@@ -15,12 +13,12 @@ class LoginCustomForm(AuthenticationForm):
 
     username = forms.CharField(
         label=_('Username'),
-        widget=forms.TextInput(attrs=attrs)
+        widget=forms.TextInput()
     )
 
     password = forms.CharField(
         label=_('Password'),
-        widget=forms.PasswordInput(attrs=attrs)
+        widget=forms.PasswordInput()
     )
 
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
@@ -29,36 +27,36 @@ class LoginCustomForm(AuthenticationForm):
 class SignUpCustomForm(UserCreationForm):
     first_name = forms.CharField(
         label=_('First Name'),
-        widget= forms.TextInput(attrs=attrs),
+        widget= forms.TextInput(),
         required=False
     )
 
     last_name = forms.CharField(
         label=_('Last Name'),
-        widget= forms.TextInput(attrs=attrs),
+        widget= forms.TextInput(),
         required=False
     )
 
     username = forms.CharField(
         label=_('Username'),
-        widget= forms.TextInput(attrs=attrs)
+        widget= forms.TextInput()
     )
 
     email = forms.EmailField(
         label=_('Email'),
-        widget= forms.TextInput(attrs=attrs),
+        widget= forms.TextInput(),
     )
 
     password1 = forms.CharField(
         label=_('Password'),
         strip=False,
-        widget=forms.PasswordInput(attrs=attrs)
+        widget=forms.PasswordInput()
     )
     
     password2 = forms.CharField(
         label=_('Password Confirmation'),
         strip=False,
-        widget=forms.PasswordInput(attrs=attrs)
+        widget=forms.PasswordInput()
     )
 
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())

@@ -59,7 +59,7 @@
             </h3>
             {% csrf_token %}
             {% include 'common/form.html' with form=form %}
-            <button type="submit" class="submit-button">
+            <button type="submit" class="submit-button below-captcha">
                 <i class="bi bi-send"></i>
                 {% trans "Send" %}
             </button>

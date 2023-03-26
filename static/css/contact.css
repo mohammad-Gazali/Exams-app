@@ -8,7 +8,7 @@
 .contact-methods-group {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     gap: 2rem;
     flex-wrap: wrap;
     width: 100%;
@@ -24,7 +24,7 @@
     padding: 1rem;
     flex-grow: 1;
     width: 30%;
-    min-width: 300px;
+    min-width: 240px;
 }
 
 .contact-method i {

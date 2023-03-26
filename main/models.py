@@ -19,6 +19,7 @@ class NormalUser(models.Model):
     birthdate = models.DateField(verbose_name=_("birthdate"))
     phone_number = PhoneNumberField()
     user = models.OneToOneField(AUTH_USER_MODEL, verbose_name=_("user"), on_delete=models.CASCADE)
+    personal_image = models.ImageField(null=True, blank=True, verbose_name=_("personal image"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created at"))
 
     class Meta:

@@ -29,9 +29,20 @@
 
 {% for field in form %}
     {% if field.label == "Captcha" %}
-    <div class="label-field-group">
+    <div class="label-field-group p-captcha-small">
         {{ field }}
     </div>
+    {% elif field.name == "phone_number" %}
+        <div class="label-field-group">
+            {% if field.field.required %}
+                <label class="label"> {{ field.label }} * </label>
+            {% else %}
+                <label class="label"> {{ field.label }} </label>
+            {% endif %}
+            <div class="input-group">
+                {{ field }}
+            </div>
+        </div>
     {% else %}
         <div class="label-field-group">
             {% if field.field.required %}

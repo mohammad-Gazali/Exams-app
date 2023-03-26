@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+
+{% block title %}
+    {% trans "Profile" %}
+{% endblock title %}
+
+{% block hero %}{% endblock hero %}
+
+{% block content %}
+    <section class="main-section">
+        {% block profile_content %}{% endblock profile_content %}
+    </section>
+{% endblock content %}

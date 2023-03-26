@@ -1,23 +1,24 @@
 from django.shortcuts import render
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.utils.translation import gettext_lazy as _
-from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
-from .forms import SendingEmailForm
+from main.forms import SendingEmailForm, CreateNormalUserForm
+from main.models import NormalUser, Teacher
 
 
 
-def index(request: HttpRequest):
+def index(request: HttpRequest) -> HttpResponse:
     return render(request, 'index.html')
 
 
-def about_us(request: HttpRequest):
+def about_us(request: HttpRequest) -> HttpResponse:
     return render(request, 'about_us.html')
 
 
-def contact(request: HttpRequest):
+def contact(request: HttpRequest) -> HttpResponse:
 
     form = SendingEmailForm()
 
@@ -58,5 +59,32 @@ def contact(request: HttpRequest):
     return render(request, 'contact.html', {"form": form, "sended": sended})
 
 
-def support(request: HttpRequest):
+def support(request: HttpRequest) -> HttpResponse:
     return render(request, 'support.html')
+
+
+@login_required
+def profile(request: HttpRequest) -> HttpResponse:
+    normal_user = NormalUser.objects.filter(user=request.user)
+
+    if normal_user:
+        return render(request, "profile/profile_main.html", {"normal_user": normal_user.first()})
+    
+    else:
+        form = CreateNormalUserForm()
+        if request.method == "POST":
+            form = CreateNormalUserForm(request.POST, request.FILES)
+
+            if form.is_valid():
+                normal_user = NormalUser.objects.create(
+                    gender=form.cleaned_data["gender"],
+                    nationality=form.cleaned_data["nationality"],
+                    birthdate=form.cleaned_data["birthdate"],
+                    phone_number=form.cleaned_data["phone_number"],
+                    personal_image=form.cleaned_data["personal_image"],
+                    user_id=request.user.id  # type: ignore
+                )
+
+                return render(request, "profile/profile_main.html", {"normal_user": normal_user})
+
+        return render(request, "profile/profile_make.html", {"form": form})

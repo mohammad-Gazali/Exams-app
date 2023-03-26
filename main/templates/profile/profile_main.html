@@ -1,0 +1,74 @@
+{% extends 'profile/profile_base.html' %}
+{% load static i18n %}
+
+
+{% block profile_content %}
+    <section class="container">
+        <h2 class="welcome-header">
+            {% trans "Hello " %}{{ normal_user.user.first_name }}.
+        </h2>
+        <section class="full-float-section">
+            <h3 class="section-header">
+                {% trans "Personal Information" %}
+            </h3>
+            <div class="personal-information-content">
+                <div class="image-and-account-type">
+                    {% if normal_user.personal_image %}
+                        <img class="personal-image" src="{{ normal_user.personal_image.url }}" alt="{{ normal_user.user.first_name }} {{ normal_user.user.last_name }}">
+                    {% else %}
+                        <img class="personal-image" src="http://via.placeholder.com/300" alt="placeholder">
+                    {% endif %}
+                    <div>
+                        {% if True %}
+                            <i class="bi bi-award-fill" style="color: #ffffff"></i> {% trans "Normal Account" %}
+                        {% elif False %}
+                            <i class="bi bi-award-fill" style="color: #cc6633"></i> {% trans "Bronze Account" %}
+                        {% elif False %}
+                            <i class="bi bi-award-fill" style="color: #808080"></i> {% trans "Silver Account" %}
+                        {% elif False %}
+                            <i class="bi bi-award-fill" style="color: #d4af37"></i> {% trans "Gold Account" %}
+                        {% else %}
+                            <i class="bi bi-award-fill" style="color: #e5e4e2"></i> {% trans "Platinum Account" %}
+                        {% endif %}
+                    </div>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>{% trans "Id" %}</th>
+                            <td>{{ normal_user.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Full name" %}</th>
+                            <td>{{ normal_user.user.first_name }} {{ normal_user.user.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Username" %}</th>
+                            <td>{{ normal_user.user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Email" %}</th>
+                            <td>{{ normal_user.user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Gender" %}</th>
+                            <td>{{ normal_user.gender|lower }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Nationality" %}</th>
+                            <td>{{ normal_user.nationality }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Birthdate" %}</th>
+                            <td>{{ normal_user.birthdate }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Phone" %}</th>
+                            <td>{{ normal_user.phone_number }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+{% endblock profile_content %}

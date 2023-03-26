@@ -265,7 +265,7 @@
     box-shadow: var(--common-shadow);
     border-radius: var(--border-radius);
     width: 160px;
-    min-height: 80px;
+    min-height: 90px;
     padding: 0.4rem;
     display: flex;
     justify-content: center;
@@ -278,7 +278,7 @@
 .exam-card .on-hover-serface-exam {
     position: absolute;
     inset: 0;
-    background: var(--secondary-dark);
+    background: var(--primary-dark);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -287,6 +287,7 @@
     pointer-events: none;
     transition: var(--transition-faster);
     border-radius: var(--border-radius);
+    text-decoration: none;
 }
 
 .exam-card:hover .on-hover-serface-exam {

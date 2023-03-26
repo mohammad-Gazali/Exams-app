@@ -163,6 +163,11 @@
                     {% trans "Logout" %}
                 </a>
             </li>
+            <li class="with-bg">
+                <a href="{% url 'profile' %}">
+                    <i class="bi bi-person-circle"></i>
+                </a>
+            </li>
         {% else %}
             <li>
                 <a href="{% url 'login' %}">
@@ -172,9 +177,6 @@
         {% endif %}
         <li class="with-bg">
             <i class="bi bi-translate"></i>
-        </li>
-        <li class="with-bg">
-            <i class="bi bi-person-circle"></i>
         </li>
         <li class="with-bg">
             <div class="badge">
