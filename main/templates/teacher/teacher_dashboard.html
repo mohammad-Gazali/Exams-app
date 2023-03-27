@@ -1,0 +1,24 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    {% if teacher.is_active %}
+        <section class="container">
+            <section class="full-float-section">
+                <a href="{% url 'teacher_create_exam' %}" class="button">
+                    {% trans "Create New Exam" %}
+                </a>
+                <a href="" class="button">
+                    {% trans "Create New Group of Exams" %}
+                </a>
+            </section>
+        </section>
+    {% else %}
+        <section class="float-section">
+            <p class="section-subheader clr-secondary text-center">
+                {% trans "Nice!, You Have Created Your Teacher Account Successfully, Please Wait Until We Review You Information." %}
+            </p>
+        </section>
+    {% endif %}
+{% endblock teacher_dashboard_content %}

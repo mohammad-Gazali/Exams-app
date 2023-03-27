@@ -1,0 +1,20 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="container full-section">
+        <h2 class="section-header">
+            {% trans "Create New Exam" %}
+        </h2>
+        <form method="POST">
+            {% csrf_token %}
+            {% comment %} TODO: determining currency {% endcomment %}
+            {% comment %} TODO: customizing checkbox input {% endcomment %}
+            {% include "common/form.html" with form=form %}
+            <button class="submit-button" type="submit">
+                continue <i class="bi bi-arrow-right"></i>
+            </button>
+        </form>
+    </section>
+{% endblock teacher_dashboard_content %}

@@ -70,5 +70,21 @@
                 </table>
             </div>
         </section>
+        <section class="full-float-section mt-4">
+            {% if is_teacher %}
+                <div class="create-teacher-link-block">
+                    <a href="{% url 'teacher' %}">
+                        {% trans "Continue To Teacher Dashboard" %}
+                    </a>
+                </div>
+            {% else %}
+                <div class="create-teacher-link-block">
+                    {% trans "Do You Want To Be a Teacher For Creating Exams And Courses?" %}
+                    <a href="{% url 'teacher' %}">
+                        {% trans "Create a Teacher Account" %}
+                    </a>
+                </div>
+            {% endif %}
+        </section>
     </section>
 {% endblock profile_content %}

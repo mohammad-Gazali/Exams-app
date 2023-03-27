@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+
+{% block title %}
+    {% trans "Teacher Dashboard" %}
+{% endblock title %}
+
+{% block hero %}{% endblock hero %}
+
+{% block content %}
+    <section class="main-section">
+        {% block teacher_dashboard_content %}{% endblock teacher_dashboard_content %}
+    </section>
+{% endblock content %}

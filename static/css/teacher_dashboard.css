@@ -1,0 +1,9 @@
+.note-under-input {
+    color: var(--note-clr) !important;
+}
+
+.ratio-block {
+    line-height: 12px;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}

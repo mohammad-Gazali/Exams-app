@@ -91,3 +91,24 @@
     padding-left: 0;
     padding-right: 0.5rem;
 }
+
+.create-teacher-link-block {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.create-teacher-link-block a {
+    font-size: 20px;
+    color: var(--secondary);
+}
+
+.create-teacher-link-block a:hover {
+    color: var(--secondary-dark);
+}

@@ -354,7 +354,7 @@
             </li>
             {% if user.is_authenticated %}
                 <li>
-                    <a href="#">
+                    <a href="{% url 'profile' %}">
                         <i class="bi bi-person-circle"></i>
                         {% trans "Profile" %}
                     </a>

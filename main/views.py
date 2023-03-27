@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
-from main.forms import SendingEmailForm, CreateNormalUserForm
+from main.forms import SendingEmailForm, CreateNormalUserForm, CreateTeacherForm
 from main.models import NormalUser, Teacher
+from main.user_tests import normal_user_test, teacher_user_test
+from exams.forms import CreateExamForm
 
 
 
@@ -65,10 +67,12 @@ def support(request: HttpRequest) -> HttpResponse:
 
 @login_required
 def profile(request: HttpRequest) -> HttpResponse:
-    normal_user = NormalUser.objects.filter(user=request.user)
+    normal_user = NormalUser.objects.filter(user=request.user).first()
 
     if normal_user:
-        return render(request, "profile/profile_main.html", {"normal_user": normal_user.first()})
+        is_teacher = bool(Teacher.objects.filter(normal_user=normal_user))
+
+        return render(request, "profile/profile_main.html", {"normal_user": normal_user, "is_teacher": is_teacher})
     
     else:
         form = CreateNormalUserForm()
@@ -88,3 +92,35 @@ def profile(request: HttpRequest) -> HttpResponse:
                 return render(request, "profile/profile_main.html", {"normal_user": normal_user})
 
         return render(request, "profile/profile_make.html", {"form": form})
+    
+
+@user_passes_test(normal_user_test, "profile")
+def teacher(request: HttpRequest) -> HttpResponse:
+    normal_user = NormalUser.objects.get(user=request.user)
+    teacher = Teacher.objects.filter(normal_user_id=normal_user).first()
+
+    if teacher:
+        return render(request, "teacher/teacher_dashboard.html", {"teacher": teacher})
+
+    else:
+        form = CreateTeacherForm()
+        if request.method == "POST":
+            form = CreateTeacherForm(request.POST, request.FILES)
+
+            if form.is_valid():
+                teacher = Teacher.objects.create(
+                    bio=form.cleaned_data["bio"],
+                    cv=form.cleaned_data["cv"],
+                    certificate=form.cleaned_data["certificate"],
+                    normal_user=normal_user
+                )
+
+                return render(request, "teacher/teacher_dashboard.html", {"teacher": teacher})
+            
+        return render(request, "teacher/teacher_make.html", {"form": form})
+
+
+@user_passes_test(teacher_user_test, "teacher")
+def teacher_create_exam(request: HttpRequest) -> HttpResponse:
+    form = CreateExamForm()
+    return render(request, "teacher/exams/create_exam.html", {"form": form})

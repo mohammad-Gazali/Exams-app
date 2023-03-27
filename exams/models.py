@@ -76,6 +76,8 @@ class Exam(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name_english = models.CharField(max_length=511, verbose_name=_("name english"))
     name_arabic = models.CharField(max_length=511, verbose_name=_("name arabic"))
+    description_english = models.TextField(verbose_name=_("description english"), null=True)
+    description_arabic = models.TextField(verbose_name=_("description arabic"), null=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, verbose_name=_("teacher"), null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created at"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("updated at"))

@@ -1,0 +1,36 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="full-section container">
+        <h2 class="section-header">
+            {% trans "Information For Teaching" %}
+        </h2>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            {% include 'common/form.html' with form=form %}
+            <button class="submit-button" type="submit">
+                <i class="bi bi-check-circle"></i>
+                {% trans "Submit" %}
+            </button>
+        </form>
+        <script>
+            // textarea tag for "bio"
+            const bioTextArea = document.getElementById("id_bio");
+
+            // span tag for "bio" charcter counter
+            const bioCounter = document.getElementById("bio-counter");
+
+            bioTextArea.oninput = (e) => {
+                if (e.target.value.length < 1300) {
+                    bioCounter.innerHTML = `${e.target.value.length} / 1300`;
+                    bioCounter.style.color = "var(--danger-main)"
+                } else {
+                    bioCounter.innerHTML = '{% trans "Good, You Passed The Minimum Length" %}'
+                    bioCounter.style.color = "var(--secondary)"
+                }
+            }
+        </script>
+    </section>
+{% endblock teacher_dashboard_content %}

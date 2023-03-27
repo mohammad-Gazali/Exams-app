@@ -4,7 +4,7 @@ from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
-from main.models import NormalUser
+from main.models import NormalUser, Teacher
 
 
 
@@ -40,3 +40,14 @@ class CreateNormalUserForm(forms.ModelForm):
     class Meta:
         model = NormalUser
         fields = ["gender", "nationality", "birthdate", "phone_number", "personal_image"]
+
+
+class CreateTeacherForm(forms.ModelForm):
+
+    bio = forms.CharField(
+        widget=forms.Textarea(attrs={"minlength": "1300"})
+    )
+
+    class Meta:
+        model = Teacher
+        exclude = ["normal_user", "is_active"]

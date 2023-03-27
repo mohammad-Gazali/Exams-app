@@ -43,6 +43,21 @@
                 {{ field }}
             </div>
         </div>
+    {% elif field.name == "bio" %}
+        <div class="label-field-group">
+            {% if field.field.required %}
+                <label class="label"> {{ field.label }} * </label>
+            {% else %}
+                <label class="label"> {{ field.label }} </label>
+            {% endif %}
+            {{ field }}
+            <div class="note-under-input">
+                {% trans "Note: The Minimum length of \"bio\" is 1300" %}
+            </div>
+            <div class="ratio-block">
+                <span id="bio-counter" style="color: var(--danger-main)">0 / 1300</span>
+            </div>
+        </div>
     {% else %}
         <div class="label-field-group">
             {% if field.field.required %}
