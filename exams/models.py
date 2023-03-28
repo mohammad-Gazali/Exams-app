@@ -81,7 +81,7 @@ class Exam(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, verbose_name=_("teacher"), null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created at"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("updated at"))
-    price = models.IntegerField(verbose_name=_("price"))
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, verbose_name=_("price"))  # type: ignore
     is_demo = models.BooleanField(default=False, verbose_name=_("is demo"))
     is_active = models.BooleanField(default=False, verbose_name=_("is active"))
     students = models.ManyToManyField(NormalUser, verbose_name=_("students"))
@@ -98,7 +98,7 @@ class ExamsGroup(models.Model):
     name_english = models.CharField(max_length=511, verbose_name=_("name english"))
     name_arabic = models.CharField(max_length=511, verbose_name=_("name arabic"))
     exams = models.ManyToManyField(Exam, verbose_name=_("exams"))
-    price = models.IntegerField(verbose_name=_("price"))
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, verbose_name=_("price"))  # type: ignore
     is_active = models.BooleanField(default=False, verbose_name=_("is active"))
     students = models.ManyToManyField(NormalUser, verbose_name=_("students"))
 
