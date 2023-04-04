@@ -4,15 +4,11 @@
 
 {% block teacher_dashboard_content %}
     {% if teacher.is_active %}
-        <section class="container">
-            <section class="full-float-section">
-                <a href="{% url 'teacher_create_exam' %}" class="button">
-                    {% trans "Create New Exam" %}
-                </a>
-                <a href="" class="button">
-                    {% trans "Create New Group of Exams" %}
-                </a>
-            </section>
+        <section class="full-section container">
+            <h3 class="section-subheader text-center">
+                {% trans "Teacher Dashboard" %}
+            </h3>
+            
         </section>
     {% else %}
         <section class="float-section">

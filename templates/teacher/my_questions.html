@@ -1,0 +1,34 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    {% if teacher.is_active %}
+        <section class="full-section container">
+            <h3 class="section-subheader">
+                {% trans "My Questions" %}
+            </h3>
+            {% if questions_number != 0 %}
+                {% for question in mcq_page_obj %}
+                    {{ question }}
+                {% endfor %}
+                {% for question in true_false_page_obj %}
+                    {{ question }}
+                {% endfor %}
+                {% for question in essay_page_obj %}
+                    {{ question }}
+                {% endfor %}
+            {% else %}
+                <div class="empty-content-text">
+                    {% trans "You Haven't Created Any Question Yet" %} <i class="bi bi-emoji-frown"></i>
+                </div>
+            {% endif %}
+        </section>
+    {% else %}
+        <section class="float-section">
+            <p class="section-subheader clr-secondary text-center">
+                {% trans "Nice!, You Have Created Your Teacher Account Successfully, Please Wait Until We Review You Information." %}
+            </p>
+        </section>
+    {% endif %}
+{% endblock teacher_dashboard_content %}

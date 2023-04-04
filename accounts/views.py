@@ -1,10 +1,17 @@
 from django.shortcuts import render
-from django.contrib.auth import login
-from django.conf import settings
-from django.urls import reverse_lazy
 from django.http import HttpRequest
 from verify_email.email_handler import send_verification_email
-from .forms import SignUpCustomForm
+from accounts.forms import SignUpCustomForm
+
+
+
+#? ===========================
+#? ==== Important Note =======
+#? ===========================
+#? I disabled the messages that "allauth" package generate in the admin panel by adding empty text file called "logged_in.txt" inside "templates" folder in this directory: "templates/account/messages/logged_in.txt"
+#? - taked from github: https://github.com/pennersr/django-allauth/issues/1455
+#? ===========================
+#? ===========================
 
 
 
@@ -14,23 +21,10 @@ def register(request: HttpRequest):
     if request.method == "POST":
         form = SignUpCustomForm(request.POST)
 
-        # login(request, object, backend=settings.AUTHENTICATION_BACKENDS[0])
-
         if form.is_valid():
+
             inactive_user = send_verification_email(request, form)
 
             return render(request, 'registration/go_to_verify.html', {"email": form.cleaned_data.get("email")})
 
     return render(request, 'registration/sign_up.html', {"form": form})
-
-
-# class RegisterView(CreateView):
-#     form_class = SignUpCustomForm
-#     template_name = 'registration/sign_up.html'
-    
-#     def get_success_url(self):
-#         login(self.request, self.object, backend=settings.AUTHENTICATION_BACKENDS[0])
-#         return reverse_lazy('home')
-    
-#     def form_valid(self, form):
-#         return super().form_valid(form)

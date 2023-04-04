@@ -1,0 +1,50 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    {% if teacher.is_active %}
+        <section class="full-section container">
+            <h3 class="section-subheader">
+                {% trans "My Exams" %}
+            </h3>
+            <div class="exams-container {% if page_obj %}mt-4{% endif %}">
+                {% for exam in page_obj %}
+                    {% include "partials/teacher/exam_card.html" with exam=exam %}
+                {% empty %}
+                    <div class="empty-content-text">
+                        {% trans "You Haven't Created Any Exam Yet" %} <i class="bi bi-emoji-frown"></i>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if page_obj %} {% comment %} TODO: continue this condition {% endcomment %}
+                {% include "partials/pagination.html" with page_obj=page_obj %}
+            {% endif %}
+        </section>
+    {% else %}
+        <section class="float-section">
+            <p class="section-subheader clr-secondary text-center">
+                {% trans "Nice!, You Have Created Your Teacher Account Successfully, Please Wait Until We Review You Information." %}
+            </p>
+        </section>
+    {% endif %}
+    <script>
+        function deleteExam(button) {
+            Swal.fire({
+                icon: 'warning',
+                title: '{% trans "Warning!" %}',
+                text: `{% trans "Are You Sure You Want To Remove" %} ${button.dataset.name}`,
+                showConfirmButton: false,
+                showDenyButton: true,
+                denyButtonText: '{% trans "Yes" %}',
+                showCancelButton: true,
+                cancelButtonText: '{% trans "No" %}',
+                
+            }).then((result) => {
+                if (result.isDenied) {
+                    window.location.replace(button.dataset.url)
+                }
+            })
+        }
+    </script>
+{% endblock teacher_dashboard_content %}

@@ -9,6 +9,6 @@ def normal_user_test(user: AbstractUser) -> bool:
 def teacher_user_test(user: AbstractUser) -> bool:
     normal_user = NormalUser.objects.filter(user=user).first()
     if normal_user:
-        return bool(Teacher.objects.filter(normal_user=normal_user))
+        return bool(Teacher.objects.filter(normal_user=normal_user, is_active=True))
     else:
         return False

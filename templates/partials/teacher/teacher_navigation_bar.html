@@ -1,0 +1,14 @@
+{% load static i18n %}
+
+<section class="container">
+    <div class="full-float-section teacher-navbar">
+        <a href="{% url 'teacher' %}" class="button">{% trans "Main" %}</a>
+        <a href="{% url 'teacher_exams' %}" class="button">{% trans "Exams" %}</a>
+        <a href="{% url 'teacher_questions' %}" class="button">{% trans "Questions" %}</a>
+        <a href="{% url 'exam_create' %}" class="button">
+            {% trans "Create New Exam" %}</a>
+        <a href="" class="button">
+            {% trans "Create New Group of Exams" %}
+        </a>
+    </div>
+</section>

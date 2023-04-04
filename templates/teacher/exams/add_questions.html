@@ -1,0 +1,120 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="full-section container">
+        <h3 class="section-header">
+            {% trans "Adding and Editing Questions" %}
+        </h3>
+        <section class="mt-2">
+            {% if quastions_number == 0 %}
+                <p class="section-subheader text-center clr-danger bg-danger-light w-fit rounded-sm p-2 mx-auto">
+                    {% trans "This exam doesn't have any questions so far." %}
+                </p>
+            {% else %}
+                <h4 class="section-subheader">
+                    {% trans "MCQ Questions" %}
+                </h4>
+                {% for mcq_question in exam.mcq_questions.all %}
+                    <span style="display: flex; gap: 0.5rem">
+                        {{ mcq_question.question_arabic|safe }}
+                        <a href="{% url 'exam_add_mcq_details' mcq_question.id %}">
+                            edit
+                        </a>
+                    </span>
+                {% endfor %}
+            {% endif %}
+        </section>
+        <section class="mt-5">
+            <ul class="add-quastion-choices">
+                <li>
+                    <button>
+                        {% trans "MCQ Question" %}
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        {% trans "Essay Question" %}
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        {% trans "True False Question" %}
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        {% trans "Question You Have Created Before" %}
+                    </button>
+                </li>
+            </ul>
+        </section>
+        <section id="current-form">
+            <form id="mcq-form" method="POST">
+                {% csrf_token %}
+                {% include "common/form.html" with form=mcq_form %}
+                {{ mcq_form.media }}
+                <button class="submit-button" type="submit">
+                    {% trans "Add The Question" %}
+                </button>
+            </form>
+            <form id="true-false-form" method="POST">
+                {% csrf_token %}
+            </form>
+            <form id="essay-form" method="POST">
+                {% csrf_token %}
+            </form>
+        </section>
+        {% comment %} <table class="primary-table mt-5">
+            <tbody>
+                <tr>
+                    <th>{% trans "Id" %}</th>
+                    <td>{{ exam.id }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "English Name" %}</th>
+                    <td>{{ exam.name_english }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Arabic Name" %}</th>
+                    <td>{{ exam.name_arabic }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "English Description" %}</th>
+                    <td class="four-lines">{{ exam.description_english }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Arabic Description" %}</th>
+                    <td class="four-lines">{{ exam.description_arabic }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Price" %}</th>
+                    <td>{{ exam.price }}$</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Create at" %}</th>
+                    <td>{{ exam.created_at }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Is Demo" %}</th>
+                    <td>{{ exam.is_demo }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Is Active" %}</th>
+                    <td>{{ exam.is_active }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Is Finish" %}</th>
+                    <td>{{ exam.is_finish }}</td>
+                </tr>
+            </tbody>
+        </table> {% endcomment %}
+        <script>
+            const MCQForm = document.getElementById("mcq-form");
+            const trueFalseForm = document.getElementById("true-false-form");
+            const essayForm = document.getElementById("essay-form");
+            const choiceForm = document.getElementById("choice-form");
+        </script>
+    </section>
+{% endblock teacher_dashboard_content %}

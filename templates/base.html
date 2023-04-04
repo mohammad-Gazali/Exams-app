@@ -18,11 +18,10 @@
 		<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 		<link rel="stylesheet" href="{% static 'css/base.css' %}" />
 		
-		<!-- Sweet Alert 2 -->
-		<script src="{% static 'js/sweetalert2.js' %}"></script>
 
 		<!-- lottie player -->
-		<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+		{% comment %} TODO: remove the comment {% endcomment %}
+		{% comment %} <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> {% endcomment %}
 		
 		<title>{% block title %}{% endblock title %}</title>
 	</head>
@@ -44,5 +43,8 @@
 		<script src="{% static 'js/swiper.min.js' %}"></script>
 		<!-- Sliders -->
 		<script src="{% static 'js/sliders.js' %}"></script>
+
+		<!-- Sweet Alert 2 -->
+		<script src="{% static 'js/sweetalert2.js' %}"></script>
 	</body>
 </html>

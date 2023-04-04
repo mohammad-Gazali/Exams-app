@@ -5,9 +5,25 @@
 {% block profile_content %}
     <section class="container">
         <h2 class="welcome-header">
-            {% trans "Hello " %}{{ normal_user.user.first_name }}.
+            {% trans "Hello" %} {% if normal_user.user.first_name %}{{ normal_user.user.first_name }}{% else %}{{ normal_user.user.username }}{% endif %}.
         </h2>
         <section class="full-float-section">
+            {% if is_teacher %}
+                <div class="create-teacher-link-block">
+                    <a href="{% url 'teacher' %}">
+                        {% trans "Continue To Teacher Dashboard" %}
+                    </a>
+                </div>
+            {% else %}
+                <div class="create-teacher-link-block">
+                    {% trans "Do You Want To Be a Teacher For Creating Exams And Courses?" %}
+                    <a href="{% url 'teacher' %}">
+                        {% trans "Create a Teacher Account" %}
+                    </a>
+                </div>
+            {% endif %}
+        </section>
+        <section class="full-float-section mt-4">
             <h3 class="section-header">
                 {% trans "Personal Information" %}
             </h3>
@@ -32,16 +48,18 @@
                         {% endif %}
                     </div>
                 </div>
-                <table>
+                <table class="primary-table">
                     <tbody>
                         <tr>
                             <th>{% trans "Id" %}</th>
                             <td>{{ normal_user.id }}</td>
                         </tr>
-                        <tr>
-                            <th>{% trans "Full name" %}</th>
-                            <td>{{ normal_user.user.first_name }} {{ normal_user.user.last_name }}</td>
-                        </tr>
+                        {% if normal_user.user.first_name and normal_user.user.last_name %}
+                            <tr>
+                                <th>{% trans "Full name" %}</th>
+                                <td>{{ normal_user.user.first_name }} {{ normal_user.user.last_name }}</td>
+                            </tr>
+                        {% endif %}
                         <tr>
                             <th>{% trans "Username" %}</th>
                             <td>{{ normal_user.user.username }}</td>
@@ -69,22 +87,6 @@
                     </tbody>
                 </table>
             </div>
-        </section>
-        <section class="full-float-section mt-4">
-            {% if is_teacher %}
-                <div class="create-teacher-link-block">
-                    <a href="{% url 'teacher' %}">
-                        {% trans "Continue To Teacher Dashboard" %}
-                    </a>
-                </div>
-            {% else %}
-                <div class="create-teacher-link-block">
-                    {% trans "Do You Want To Be a Teacher For Creating Exams And Courses?" %}
-                    <a href="{% url 'teacher' %}">
-                        {% trans "Create a Teacher Account" %}
-                    </a>
-                </div>
-            {% endif %}
         </section>
     </section>
 {% endblock profile_content %}

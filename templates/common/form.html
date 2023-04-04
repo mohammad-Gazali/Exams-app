@@ -28,16 +28,26 @@
 </ul>
 
 {% for field in form %}
-    {% if field.label == "Captcha" %}
-    <div class="label-field-group p-captcha-small">
-        {{ field }}
-    </div>
+    {% if field.widget_type == "checkbox" %}
+        <div class="label-field-group-checkbox">
+            <label class="label label-checkbox">
+                {{ field }}
+                <span tabindex="-1" class="indicator">
+                    <i class="bi bi-check"></i>
+                </span>
+                {{ field.label }}
+            </label>
+        </div>
+    {% elif field.label == "Captcha" %}
+        <div class="label-field-group p-captcha-small">
+            {{ field }}
+        </div>
     {% elif field.name == "phone_number" %}
         <div class="label-field-group">
             {% if field.field.required %}
-                <label class="label"> {{ field.label }} * </label>
+                <label for="{{ field.id_for_label }}" class="label"> {{ field.label }} * </label>
             {% else %}
-                <label class="label"> {{ field.label }} </label>
+                <label for="{{ field.id_for_label }}" class="label"> {{ field.label }} </label>
             {% endif %}
             <div class="input-group">
                 {{ field }}
@@ -46,9 +56,9 @@
     {% elif field.name == "bio" %}
         <div class="label-field-group">
             {% if field.field.required %}
-                <label class="label"> {{ field.label }} * </label>
+                <label for="{{ field.id_for_label }}" class="label"> {{ field.label }} * </label>
             {% else %}
-                <label class="label"> {{ field.label }} </label>
+                <label for="{{ field.id_for_label }}" class="label"> {{ field.label }} </label>
             {% endif %}
             {{ field }}
             <div class="note-under-input">
@@ -61,9 +71,9 @@
     {% else %}
         <div class="label-field-group">
             {% if field.field.required %}
-                <label class="label"> {{ field.label }} * </label>
+                <label for="{{ field.id_for_label }}" class="label"> {{ field.label }} * </label>
             {% else %}
-                <label class="label"> {{ field.label }} </label>
+                <label for="{{ field.id_for_label }}" class="label"> {{ field.label }} </label>
             {% endif %}
             {{ field }}
         </div>

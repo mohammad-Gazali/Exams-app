@@ -1,0 +1,67 @@
+{% load i18n humanize %}
+
+
+<div class="teacher-exam-card">
+    <div class="card-head">
+        <h4 class="card-title">
+            {{ exam.name_english }}
+        </h4>
+        <ul class="card-badge-container">
+    
+            {% if exam.is_demo %}
+                <li class="card-badge">
+                    {% trans "demo" %}
+                </li>
+            {% else %}
+                <li class="card-badge">
+                    {% trans "paid" %}
+                </li>
+            {% endif %}
+        
+            {% if exam.is_active %}
+                <li class="card-badge">
+                    {% trans "active" %}
+                </li>
+            {% else %}
+                <li class="card-badge">
+                    {% trans "inactive" %}
+                </li>
+            {% endif %}
+        
+            {% if exam.is_finish %}
+                <li class="card-badge">
+                    {% trans "completed" %}
+                </li>
+            {% else %}
+                <li class="card-badge">
+                    {% trans "uncompleted" %}            
+                </li>
+            {% endif %}
+    
+        </ul>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            {{ exam.description_english }}
+        </p>
+    </div>
+    <div class="card-end">
+        <div class="card-actions">
+            <a href="{% url 'exam_edit' exam.id %}" class="button clr-primary-content">
+                {% trans "Edit Exam" %} <i class="bi bi-pencil-square" style="color: inherit"></i>
+            </a>
+            <a href="{% url 'exam_add_quastions' exam.id %}" class="button bg-secondary clr-primary-content">
+                {% trans "Add Questions" %} <i class="bi bi-plus-lg" style="color: inherit"></i>
+            </a>
+            <button data-url="{% url 'exam_delete' exam.id %}" data-name="{{ exam.name_english }}" class="bg-danger clr-primary-content" onclick="deleteExam(this)">
+                {% trans "Delete" %} <i class="bi bi-trash" style="color: inherit"></i>
+            </button>
+        </div>
+        <span>
+            <time datetime="{{ exam.created_at }}">
+                {{ exam.created_at|naturaltime }}
+            </time>
+            <i class="bi bi-clock"></i>
+        </span>
+    </div>
+</div>

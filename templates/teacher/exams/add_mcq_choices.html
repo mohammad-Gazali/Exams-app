@@ -1,0 +1,106 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="full-section container">
+        <h3 class="section-subheader">
+            {% trans "Adding MCQ Choices" %}
+        </h3>
+        <ul id="choices-list">
+            {% for choice in question.choiceanswer_set.all %}
+                <li>
+                    {{ choice.content_english }}
+                    {% if choice.is_right %}
+                        right
+                    {% else %}
+                        wrong
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <form action="{% url 'ajax_add_mcq_choice' %}" id="add-choice-form" method="POST">
+            {% csrf_token %}
+            {% include "common/form.html" with form=form %}
+            <button class="submit-button" type="submit">
+                {% trans "Add The Choice" %}
+            </button>
+        </form>
+    </section>
+    <script>
+        const addChoiceForm = document.getElementById("add-choice-form");
+        const choicesList = document.getElementById("choices-list")
+
+        addChoiceForm.onsubmit = async (e) => {
+            e.preventDefault();
+
+            const form = new FormData(addChoiceForm)
+
+            const response = await fetch(e.target.action, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({
+                    ...Object.fromEntries(form),
+                    question_id: "{{ question.id }}"
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.error === "right_repeated") {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: '{% trans "Repeated Right Answer" %}',
+                    text: data.message,
+                    confirmButtonText: '{% trans "OK" %}',
+                    confirmButtonColor: '#004c98',
+                })
+
+            } else if (data.error === "non-valid_form") {
+                
+                Swal.fire({
+                    icon: 'error',
+                    title: '{% trans "Non Valid Form" %}',
+                    text: data.message,
+                    confirmButtonText: '{% trans "OK" %}',
+                    confirmButtonColor: '#004c98',
+                })
+
+            } else if (data.error === "question_id") {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: '{% trans "Question Id Required" %}',
+                    text: data.message,
+                    confirmButtonText: '{% trans "OK" %}',
+                    confirmButtonColor: '#004c98',
+                })
+
+            } else if (data.error === "forbidden") {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: '{% trans "Forbidden" %}',
+                    confirmButtonText: '{% trans "OK" %}',
+                    confirmButtonColor: '#004c98',
+                })
+
+            } else if (data.message === "success") {
+                const { new_choice } = data;
+
+                const newChoiceChild = document.createElement("li");
+
+                newChoiceChild.innerHTML = `${new_choice.content_english} ${new_choice.is_right ? "right" : "wrong"}`
+
+                choicesList.insertBefore(newChoiceChild, choicesList.firstChild);
+
+                addChoiceForm.reset()
+            }
+
+        }
+    </script>
+{% endblock teacher_dashboard_content %}

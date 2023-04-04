@@ -9,7 +9,8 @@
 {% block hero %}{% endblock hero %}
 
 {% block content %}
-    <section class="main-section">
+    <section class="main-section-teacher-dashboard">
+        {% include "partials/teacher/teacher_navigation_bar.html" %}
         {% block teacher_dashboard_content %}{% endblock teacher_dashboard_content %}
     </section>
 {% endblock content %}

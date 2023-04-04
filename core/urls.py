@@ -5,9 +5,13 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    # admin urls
     path('admin/', admin.site.urls),
+
+    # my apps
     path('', include('main.urls')),
     path('my-accounts/', include('accounts.urls')),
+    path('exams/', include('exams.urls')),
 
 
     # for google authentication

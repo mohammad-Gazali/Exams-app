@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email address</title>
+
+    <style>
+        .format-font {
+            font-family: 'Cairo', sans-serif; 
+        }
+
+        .my-container {
+            margin: 10px;
+            padding: 10px;
+            padding-top: 0px;
+            justify-content: center;
+            border-radius: 5px;
+            border: 1px solid rgb(204, 203, 203);
+        }
+
+        .button {
+            border: none;
+            text-decoration: none;
+            background-color: #004c98;
+            color: white;
+            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            transition: 0.2s;
+            cursor: pointer;
+            font-size: 24px;
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .button:hover {
+            background-color: #00347c;
+        }
+
+        .button:focus,
+        .button:active {
+            border: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="my-container">
+
+        <div style="background-color: #004c98; border-radius: 15px;">
+            <h1 class="format-font" style="text-align: center; padding: 2px; color: white;">
+                Account Activation
+            </h1>
+        </div>
+
+        <h2 class="format-font" style="text-align: center; color: #00347c">E-mail Confirmation</h2> <hr style="background-color: #8ed1f3; width:100px">
+
+        <div class="format-font" style="margin-top: 20px; line-height: 1.5; color: #00347c">
+            <p style="text-align: center; font-weight: bold; color: #00347c">Greetings!</p>
+            You received this mail because you attempted to make account on our website, 
+            Please click on the link below to confirm the email and activate your account.       
+        </div>
+
+        <p class="format-font" style="text-align: center; margin-top: 50px; color: #00347c">
+            Please verify your e-mail :
+            <hr style="background-color: #8ed1f3; width:50px">
+            <div class="format-font" style="text-align: center; margin-top: 30px;" >
+                <a href="{{ link }}" class="button" >Verify</a>
+            </div>
+        </p>
+    
+        <p class="format-font" style="margin-top: 50px; color: #00347c">
+           <b>You'll be joining us right after the verification !</b>
+        </p>
+    
+        <p class="format-font" style="line-height: 1.5; color: #00347c">
+            <b>Thanks for joining! <br> This mail machine generated. <br>Do not reply to this mail </b>
+        </p>
+        
+    </div>
+   
+</body>
+</html>

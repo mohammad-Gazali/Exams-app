@@ -1,14 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
+from django.core.paginator import Paginator
 from main.forms import SendingEmailForm, CreateNormalUserForm, CreateTeacherForm
 from main.models import NormalUser, Teacher
 from main.user_tests import normal_user_test, teacher_user_test
-from exams.forms import CreateExamForm
+from exams.models import Exam, MultipleChoiceQuestion, TrueFalseQuestion, EssayQuestion
 
 
 
@@ -95,12 +96,15 @@ def profile(request: HttpRequest) -> HttpResponse:
     
 
 @user_passes_test(normal_user_test, "profile")
-def teacher(request: HttpRequest) -> HttpResponse:
+def teacher_main(request: HttpRequest) -> HttpResponse:
     normal_user = NormalUser.objects.get(user=request.user)
     teacher = Teacher.objects.filter(normal_user_id=normal_user).first()
-
     if teacher:
-        return render(request, "teacher/teacher_dashboard.html", {"teacher": teacher})
+        exams = Exam.objects.filter(teacher=teacher).order_by("-created_at")
+        paginator = Paginator(exams, 6)
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        return render(request, "teacher/teacher_dashboard.html", {"teacher": teacher, "page_obj": page_obj})
 
     else:
         form = CreateTeacherForm()
@@ -118,9 +122,48 @@ def teacher(request: HttpRequest) -> HttpResponse:
                 return render(request, "teacher/teacher_dashboard.html", {"teacher": teacher})
             
         return render(request, "teacher/teacher_make.html", {"form": form})
+    
+
+@user_passes_test(teacher_user_test, "teacher")
+def teacher_exams(request: HttpRequest) -> HttpResponse:
+    normal_user = NormalUser.objects.get(user=request.user)
+    teacher = Teacher.objects.get(normal_user_id=normal_user)
+    
+    exams = Exam.objects.filter(teacher=teacher).order_by("-created_at")
+    paginator = Paginator(exams, 6)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "teacher/my_exams.html", {"teacher": teacher, "page_obj": page_obj})
 
 
 @user_passes_test(teacher_user_test, "teacher")
-def teacher_create_exam(request: HttpRequest) -> HttpResponse:
-    form = CreateExamForm()
-    return render(request, "teacher/exams/create_exam.html", {"form": form})
+def teacher_questions(request: HttpRequest) -> HttpResponse:
+    normal_user = NormalUser.objects.get(user=request.user)
+    teacher = Teacher.objects.prefetch_related().get(normal_user_id=normal_user)
+
+    page_number = request.GET.get("page")
+
+
+    mcq_questions = MultipleChoiceQuestion.objects.filter(teacher=teacher)
+    mcq_paginator = Paginator(mcq_questions, 12)
+    mcq_page_obj = mcq_paginator.get_page(page_number)
+
+    true_false_questions = TrueFalseQuestion.objects.filter(teacher=teacher)
+    true_false_paginator = Paginator(true_false_questions, 12)
+    true_false_page_obj = true_false_paginator.get_page(page_number)
+
+    essay_questions = EssayQuestion.objects.filter(teacher=teacher)
+    essay_paginator = Paginator(essay_questions, 12)
+    essay_page_obj = essay_paginator.get_page(page_number)
+
+    questions_number = mcq_questions.count() + true_false_questions.count() + essay_questions.count()
+
+    return render(request, "teacher/my_questions.html", {
+            "teacher": teacher,
+            "mcq_page_obj": mcq_page_obj,
+            "true_false_page_obj": true_false_page_obj,
+            "essay_page_obj": essay_page_obj,
+            "questions_number": questions_number
+        }
+    )
