@@ -1,0 +1,129 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="full-section container">
+        {% if exam.mcq_questions.all or exam.true_false_questions.all or exam.essay_questions.all %}
+            <h4 class="section-header">
+                {% trans "Finishing The Exam" %}
+            </h4>
+            <h3 class="section-subheader clr-danger">
+                {% trans "Warning" %}
+            </h3>
+            <p class="clr-danger">
+                {% trans "Be Careful. After You Finish The Exam By Clicking The Button Below Then You Can't Delete OR Modify Any Question That Exists in This Exam, and If This Exam Is Accepted By The Admin Then You Can't Modify Any Thing In The Exam." %}
+            </p>
+            <table class="primary-table mt-5">
+                <tbody>
+                    <tr>
+                        <th>{% trans "Id" %}</th>
+                        <td>{{ exam.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "English Name" %}</th>
+                        <td>{{ exam.name_english }}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Arabic Name" %}</th>
+                        <td>{{ exam.name_arabic }}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "English Description" %}</th>
+                        <td class="four-lines">{{ exam.description_english }}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Arabic Description" %}</th>
+                        <td class="four-lines">{{ exam.description_arabic }}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Price" %}</th>
+                        <td>{{ exam.price }}$</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Create at" %}</th>
+                        <td>{{ exam.created_at }}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Is Demo" %}</th>
+                        <td>{{ exam.is_demo }}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Is Active" %}</th>
+                        <td>{{ exam.is_active }}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Is Finish" %}</th>
+                        <td>{{ exam.is_finish }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4 class="section-subheader mt-4">
+                {% trans "MCQ Questions" %}
+            </h4>
+            <div class="teacher-question-wrapper mt-1">
+                {% for mcq_question in exam.mcq_questions.all %}
+                    {% include "partials/teacher/question_card.html" with question=mcq_question exam=exam type="mcq" %}
+                {% empty %}
+                    <div class="empty-content-text">
+                        {% trans "No MCQ Questions In This Exam Yet" %}
+                    </div>
+                {% endfor %}
+            </div>
+            <hr class="line-separator-thin mt-5">
+            <h4 class="section-subheader mt-3">
+                {% trans "True-False Questions" %}
+            </h4>
+            <div class="teacher-question-wrapper mt-1">
+                {% for true_false_question in exam.true_false_questions.all %}
+                    {% include "partials/teacher/question_card.html" with question=true_false_question exam=exam type="true-false" %}
+                {% empty %}
+                    <div class="empty-content-text">
+                        {% trans "No True-False Questions In This Exam Yet" %}
+                    </div>
+                {% endfor %}
+            </div>
+            <hr class="line-separator-thin mt-4">
+            <h4 class="section-subheader mt-3">
+                {% trans "Essay Questions" %}
+            </h4>
+            <div class="teacher-question-wrapper mt-1">
+                {% for essay_question in exam.essay_questions.all %}
+                    {% include "partials/teacher/question_card.html" with question=essay_question exam=exam type="essay" %}
+                {% empty %}
+                    <div class="empty-content-text">
+                        {% trans "No Essay Questions In This Exam Yet" %}
+                    </div>
+                {% endfor %}
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <button class="submit-button" type="submit">
+                    {% trans "Finishing The Exam" %}
+                </button>
+            </form>
+            <script>
+                function removeQuestionFromExam(button) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '{% trans "Warning!" %}',
+                        text: `{% trans "Are You Sure You Want To Remove This Question From This Exam" %}`,
+                        showConfirmButton: false,
+                        showDenyButton: true,
+                        denyButtonText: '{% trans "Yes" %}',
+                        showCancelButton: true,
+                        cancelButtonText: '{% trans "No" %}',
+                    }).then((result) => {
+                        if (result.isDenied) {
+                            window.location.replace(button.dataset.url)
+                        }
+                    })
+                }
+            </script>
+        {% else %}
+            <div class="empty-content-text">
+                {% trans "You Haven't Created Any Question In This Exam For Finishing It" %} <i class="bi bi-emoji-neutral"></i>
+            </div>
+        {% endif %}
+    </section>
+{% endblock teacher_dashboard_content %}

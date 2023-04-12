@@ -1,13 +1,18 @@
 from django import forms
-from exams.models import Exam, MultipleChoiceQuestion, ChoiceAnswer
+from django.utils.translation import gettext_lazy as _
+from exams.models import Exam, MultipleChoiceQuestion, ChoiceAnswer, TrueFalseQuestion, EssayQuestion
 
 
 
-class CreateExamForm(forms.ModelForm):
+class ExamForm(forms.ModelForm):
 
     is_demo = forms.CharField(
         widget=forms.CheckboxInput(attrs={"class": "checkbox"}),
         required=False
+    )
+
+    price = forms.CharField(
+        label=_("Price In Dollars $")
     )
 
     class Meta:
@@ -23,37 +28,26 @@ class CreateExamForm(forms.ModelForm):
         ]
 
 
-class UpdateExamForm(forms.ModelForm):
-
-    is_demo = forms.CharField(
-        widget=forms.CheckboxInput(attrs={"class": "checkbox"}),
-        required=False
-    )
-
-    is_finish = forms.CharField(
-        widget=forms.CheckboxInput(attrs={"class": "checkbox"}),
-        required=False
-    )
-
-    class Meta:
-        model = Exam
-        exclude = [
-            "teacher",
-            "students",
-            "mcq_questions",
-            "true_false_questions",
-            "essay_questions",
-            "is_active",
-        ]
-
-
-class CreateMultipleChoiceQuestionForm(forms.ModelForm):
+class MultipleChoiceQuestionForm(forms.ModelForm):
     class Meta:
         model = MultipleChoiceQuestion
-        exclude = ["teacher"]
+        exclude = ["teacher", "is_finish"]
 
 
-class CreateChoiceAnswerForm(forms.ModelForm):
+class ChoiceAnswerForm(forms.ModelForm):
     class Meta:
         model = ChoiceAnswer
         exclude = ["question"]
+
+
+class TrueFalseQuestionForm(forms.ModelForm):
+    class Meta:
+        model = TrueFalseQuestion
+        exclude = ["teacher", "is_finish"]
+
+
+class EssayQuestionForm(forms.ModelForm):
+    class Meta:
+        model = EssayQuestion
+        exclude = ["teacher", "is_finish"]
+        

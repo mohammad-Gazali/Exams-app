@@ -1,0 +1,81 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="full-section container">
+        <h3 class="section-header">
+            {% trans "You Need To Treat These Problems Before Finishing" %}
+        </h3>
+        {% for problem in problems %}
+            {% if problem == "no choices" %}
+                <h4 class="section-subheader clr-danger mt-5">
+                    {% trans "Problem: No Choices" %}
+                </h4>
+                <p class="clr-danger">
+                    {% trans "These Questions Don't Have Any Choice For Each Question, Every MCQ Question Must Contain At Least Two Choices One Of Them Is Right Choice." %}
+                </p>
+                <div class="teacher-question-wrapper mt-2">
+                    {% for question in extra_info.no_choices %}
+                        {% include "partials/teacher/question_card.html" with question=question type="mcq" %}
+                    {% endfor %}
+                </div>
+            {% elif problem == "no enough choices" %}
+                <h4 class="section-subheader clr-danger mt-5">
+                    {% trans "Problem: No Enough Choices" %}
+                </h4>
+                <p class="clr-danger">
+                    {% trans "These Questions Have One Choice For Each Question, Every MCQ Question Must Contain At Least Two Choices One Of Them Is Right Choice." %}
+                </p>
+                <div class="teacher-question-wrapper mt-2">
+                    {% for question in extra_info.no_enough_choices %}
+                        {% include "partials/teacher/question_card.html" with question=question type="mcq" %}
+                    {% endfor %}
+                </div>
+            {% elif problem == "no right choice" %}
+                <h4 class="section-subheader clr-danger mt-5">
+                    {% trans "Problem: No Right Choice" %}
+                </h4>
+                <p class="clr-danger">
+                    {% trans "These Questions Don't Have Any Right Choice For Each Question, Every MCQ Question Must Contain At Least Two Choices One Of Them Is Right Choice." %}
+                </p>
+                <div class="teacher-question-wrapper mt-2">
+                    {% for question in extra_info.no_right_choice %}
+                        {% include "partials/teacher/question_card.html" with question=question type="mcq" %}
+                    {% endfor %}
+                </div>
+            {% elif problem == "essay keyword" %}
+                <h4 class="section-subheader clr-danger mt-5">
+                    {% trans "Problem: No Essay Keywords" %}
+                </h4>
+                <p class="clr-danger">
+                    {% trans "These Questions Don't Have Any Keyword For Each Question, Every Essay Question Must Has At Least One Keyword." %}
+                </p>
+                <div class="teacher-question-wrapper mt-2">
+                    {% for question in extra_info.essay %}
+                        {% include "partials/teacher/question_card.html" with question=question type="essay" %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </section>
+    <script>
+        function deleteQuestion(button) {
+            Swal.fire({
+                icon: 'warning',
+                title: '{% trans "Warning!" %}',
+                text: `{% trans "Are You Sure You Want To Delete This Question" %}`,
+                showConfirmButton: false,
+                showDenyButton: true,
+                denyButtonText: '{% trans "Yes" %}',
+                showCancelButton: true,
+                cancelButtonText: '{% trans "No" %}',
+                
+            }).then((result) => {
+                if (result.isDenied) {
+                    window.location.replace(button.dataset.url)
+                }
+            })
+        }
+    </script>
+{% endblock teacher_dashboard_content %}

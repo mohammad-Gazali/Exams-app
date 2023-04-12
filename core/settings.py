@@ -63,6 +63,10 @@ INSTALLED_APPS = [
 
     # for phone number field
     'phonenumber_field',
+
+    # TODO: Remove After Finishing Development
+    # debug toolbar
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +77,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # TODO: Remove After Finishing Development
+    # debug toolbar
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -90,6 +98,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # my context processor
+                'main.context_processor.my_context'
             ],
         },
     },
@@ -132,12 +143,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 #* initial language
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 #* available languages code and its name
 LANGUAGES = [
     ('ar', 'العربية'),
-    ('en-us', 'English'),
+    ('en', 'English'),
 ]
 
 
@@ -181,7 +192,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
 
-
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -214,14 +224,12 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'no_reply@test.com'
 
 
-CONTACT_EMAIL = 'contact@test.com'  #? This My Custom Constant
+
 
 
 # for email vertification
 VERIFICATION_SUCCESS_TEMPLATE = "registration/success.html"
-
 VERIFICATION_FAILED_TEMPLATE = "registration/failed.html"
-
 HTML_MESSAGE_TEMPLATE = "email/email_vertification.html"
 
 
@@ -235,17 +243,10 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 CKEDITOR_UPLOAD_PATH = "ckeditor-uploads/"
 
 
-# CKEDITOR_CONFIGS = {
-#     'awesome_ckeditor': {
-#         'toolbar': 'Basic',
-#     },
-# }
-
 CKEDITOR_CONFIGS = {
     'default': {
         'height': 100,
         'width': "100%",
-        'max-width': 700
     },
 }
 
@@ -323,3 +324,19 @@ CKEDITOR_CONFIGS = {
 #         ]),
 #     }
 # }
+
+
+
+#* CONSTANTS
+G_WEBSITE_URL = "http://localhost:8000"
+CONTACT_EMAIL = 'contact@test.com'
+
+
+
+# TODO: Remove After Finishing Development
+# for debug toolbar
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]

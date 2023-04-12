@@ -25,6 +25,10 @@ urlpatterns = [
 
     # for ckeditor uploading images
     path('ckeditor/', include('ckeditor_uploader.urls')),
+
+    # TODO: Remove After Finishing Development
+    # debug toolbar
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 if settings.DEBUG:

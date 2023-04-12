@@ -1,0 +1,201 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n my_filters %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="full-section container">
+        <h3 class="section-subheader">
+            {% trans "Adding Essay Question Keywords" %}
+        </h3>
+        <form id="add-keyword-form" action="{% url 'ajax_add_essay_keyword' %}" method="POST">
+            {% csrf_token %}
+            <div id="add-keyword-form-error" style="color: var(--danger-dark)"></div>
+            <ul class="keywords-wrapper mt-2" id="keywords-wrapper">
+                {% for keyword in question.essayquestionkeyword_set.all %}
+                    <li class="keywords-pair">
+                        <div>
+                            {{ keyword.content_english }}&nbsp; | | &nbsp;{{ keyword.content_arabic }}
+                        </div>
+                        <span class="delete-keyword-button" data-id="{{ keyword.id }}">
+                            <i class="bi bi-x-lg"></i>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="marking-text-block mt-3">
+                <div class="label-field-group">
+                    <label for="english_keyword" class="label"> {% trans "Keyword english" %} * </label>
+                    <input pattern="[\S]+" name="english_keyword" id="english_keyword" type="text" required>
+                </div>
+                <div class="mt-1">
+                    {% for word in english_list %}
+                        <span data-lang="en" data-index="{{ forloop.counter0 }}">
+                            {{ word }}
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="marking-text-block mt-2">
+                <div class="label-field-group">
+                    <label for="arabic_keyword" class="label"> {% trans "Keyword arabic" %} * </label>
+                    <input pattern="[\S]+" name="arabic_keyword" id="arabic_keyword" type="text" required>
+                </div>
+                <div class="mt-1">
+                    {% for word in arabic_list %}
+                        <span data-lang="ar" data-index="{{ forloop.counter0 }}">
+                            {{ word }}
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+            <button class="submit-button" type="submit">
+                {% trans "Add The Keyword" %}
+            </button>
+        </form>
+    </section>
+    <script>
+        const addKewordForm = document.getElementById("add-keyword-form");
+        const englishWordsSpans = document.querySelectorAll('[data-lang="en"]');
+        const arabicWordsSpans = document.querySelectorAll('[data-lang="ar"]');
+        const englishKeywordInput = document.getElementById("english_keyword");
+        const arabicKeywordInput = document.getElementById("arabic_keyword");
+        const addKeywordFormError = document.getElementById("add-keyword-form-error");
+        const keywordsWrapper = document.getElementById("keywords-wrapper");
+        const deleteKeywordBtns = document.querySelectorAll(".delete-keyword-button")
+
+
+        let matchEnglishState = false;
+        let matchArabicState = false;
+
+
+        // trim method is like strip() in python
+        const englishWords = Array.from(englishWordsSpans).map((word) =>
+            word.textContent.trim()
+        );
+        const arabicWords = Array.from(arabicWordsSpans).map((word) =>
+            word.textContent.trim()
+        );
+
+        englishKeywordInput.oninput = (e) => {
+            
+            englishWordsSpans.forEach((span) => {
+                span.classList.remove("mark");
+            });
+
+            matchEnglishState = false;
+
+            if (englishWords.includes(e.target.value)) {
+                const wordIndex = englishWords.indexOf(e.target.value);
+                const matchSpan = englishWordsSpans[wordIndex];
+                englishKeywordInput.dataset.currentId = `${wordIndex}`;
+                matchSpan.classList.add("mark");
+                matchEnglishState = true;
+            }
+        };
+
+        arabicKeywordInput.oninput = (e) => {
+
+            arabicWordsSpans.forEach((span) => {
+                span.classList.remove("mark");
+            });
+
+            matchArabicState = false;
+
+            if (arabicWords.includes(e.target.value)) {
+                const wordIndex = arabicWords.indexOf(e.target.value);
+                const matchSpan = arabicWordsSpans[wordIndex];
+                matchSpan.classList.add("mark");
+                arabicKeywordInput.dataset.currentId = `${wordIndex}`;
+                matchArabicState = true;
+            }
+        };
+
+
+        addKewordForm.onsubmit = async (e) => {
+            e.preventDefault();
+
+            if (matchArabicState && matchEnglishState) {
+                
+                const response = await fetch("{% url 'ajax_add_essay_keyword' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({
+                        "arabic_keyword": arabicKeywordInput.value,
+                        "arabic_keyword_index": arabicKeywordInput.dataset.currentId,
+                        "english_keyword": englishKeywordInput.value,
+                        "english_keyword_index": englishKeywordInput.dataset.currentId,
+                        "question_id": "{{ question.id }}"
+                    })
+                })
+
+                const data = await response.json();
+
+                if (data.state === "error") {
+                    
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{% trans "Error" %}',
+                        text: data.message,
+                        confirmButtonText: '{% trans "OK" %}',
+                        confirmButtonColor: '#004c98',
+                    })
+
+                } else {
+                    const newChild = document.createElement("li");
+
+                    newChild.classList.add("keywords-pair");
+
+                    newChild.innerHTML = `<div>
+                        ${data.new_keyword_data.keyword_english}&nbsp; | | &nbsp;${data.new_keyword_data.keyword_arabic}
+                    </div>
+                    <span class="delete-keyword-button" data-id="${data.new_keyword_data.id}">
+                        <i class="bi bi-x-lg"></i>
+                    </span>`
+
+                    keywordsWrapper.appendChild(newChild);
+
+                    addKewordForm.reset();
+
+                    englishWordsSpans.forEach((span) => {
+                        span.classList.remove("mark");
+                    });
+
+                    arabicWordsSpans.forEach((span) => {
+                        span.classList.remove("mark");
+                    });
+                }
+
+            } else {
+                addKeywordFormError.innerHTML = '{% trans "You Should Add The Keywrod In Both Languages, Arabic and English." %}'
+                addKeywordFormError.classList.add("form-error");
+                addKeywordFormError.classList.add("mt-2");
+            }
+        }
+
+        deleteKeywordBtns.forEach(btn => {
+            btn.onclick = async () => {
+
+                const response = await fetch("{% url 'ajax_delete_essay_keyword' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({ 
+                        keyword_id: btn.dataset.id,
+                        question_id: "{{ question.id }}"
+                    })
+                })
+
+                const data = await response.json();
+
+                if (data.state === "success") {
+                    btn.closest(".keywords-pair").remove();
+                }
+            }
+        })
+    </script>
+{% endblock teacher_dashboard_content %}

@@ -10,6 +10,7 @@ from main.forms import SendingEmailForm, CreateNormalUserForm, CreateTeacherForm
 from main.models import NormalUser, Teacher
 from main.user_tests import normal_user_test, teacher_user_test
 from exams.models import Exam, MultipleChoiceQuestion, TrueFalseQuestion, EssayQuestion
+from typing import Literal
 
 
 
@@ -28,6 +29,11 @@ def contact(request: HttpRequest) -> HttpResponse:
     sended = False
 
     if request.method == "POST":
+
+        if not request.user.is_authenticated:
+            return redirect("contact")
+        
+
         form = SendingEmailForm(request.POST)
 
         if form.is_valid():
@@ -138,7 +144,7 @@ def teacher_exams(request: HttpRequest) -> HttpResponse:
 
 
 @user_passes_test(teacher_user_test, "teacher")
-def teacher_questions(request: HttpRequest) -> HttpResponse:
+def teacher_questions(request: HttpRequest, q_type: Literal["mcq", "true-false", "essay"]) -> HttpResponse:
     normal_user = NormalUser.objects.get(user=request.user)
     teacher = Teacher.objects.prefetch_related().get(normal_user_id=normal_user)
 
@@ -157,13 +163,26 @@ def teacher_questions(request: HttpRequest) -> HttpResponse:
     essay_paginator = Paginator(essay_questions, 12)
     essay_page_obj = essay_paginator.get_page(page_number)
 
-    questions_number = mcq_questions.count() + true_false_questions.count() + essay_questions.count()
-
-    return render(request, "teacher/my_questions.html", {
-            "teacher": teacher,
-            "mcq_page_obj": mcq_page_obj,
-            "true_false_page_obj": true_false_page_obj,
-            "essay_page_obj": essay_page_obj,
-            "questions_number": questions_number
-        }
-    )
+    if q_type == "mcq":
+        return render(request, "teacher/my_questions.html", {
+                "teacher": teacher,
+                "page_obj": mcq_page_obj,
+                "type": "mcq"
+            }
+        )
+    
+    elif q_type == "true-false":
+        return render(request, "teacher/my_questions.html", {
+                "teacher": teacher,
+                "page_obj": true_false_page_obj,
+                "type": "true-false"
+            }
+        )
+    
+    else:
+        return render(request, "teacher/my_questions.html", {
+                "teacher": teacher,
+                "page_obj": essay_page_obj,
+                "type": "essay"
+            }
+        )

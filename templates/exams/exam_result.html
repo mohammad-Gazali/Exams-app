@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load i18n my_filters %}
+
+
+{% block title %}
+    {% trans "Exam Result" %}
+{% endblock title %}
+
+{% block hero %}{% endblock hero %}
+
+{% block content %}
+    <section class="full-section container">
+        <h3 class="section-header">
+            {% trans "Exam Result" %}
+        </h3>
+        <style>
+            @keyframes mcq-progress {
+                to { --progress-value: {{ mcq_result }}; }
+            }
+              
+            @keyframes true-false-progress {
+                to { --progress-value: {{ true_false_result }}; }
+            }
+              
+            @keyframes essay-progress {
+                to { --progress-value: {{ essay_result }}; }
+            }
+
+            @keyframes final-progress {
+                to { --progress-value: {{ final_result }}; }
+            }
+        </style>
+        <ul class="progress-block-container">
+            <li class="progress-block" style="{{ mcq_result|get_result_colors }}; --progress-value: {{ mcq_result }}">
+                <h4>
+                    {% trans "MCQ Result" %}
+                </h4>
+                <div class="progress-bar mcq-progess">
+                    <progress id="mcq" min="0" max="100" value="{{ mcq_result }}"></progress>
+                </div>
+            </li>
+            <li class="progress-block" style="{{ true_false_result|get_result_colors }}; --progress-value: {{ true_false_result }}">
+                <h4>
+                    {% trans "True False Result" %}
+                </h4>
+                <div class="progress-bar true-false-progess">
+                    <progress id="true-false" min="0" max="100" value="{{ true_false_result }}"></progress>
+                </div>
+            </li>
+            <li class="progress-block" style="{{ essay_result|get_result_colors }}; --progress-value: {{ essay_result }}">
+                <h4>
+                    {% trans "Essay Result" %}
+                </h4>
+                <div class="progress-bar essay-progess">
+                    <progress id="essay" min="0" max="100" value="{{ essay_result }}"></progress>
+                </div>
+            </li>
+            <li class="progress-block" style="{{ final_result|get_result_colors }}; --progress-value: {{ final_result }}">
+                <h4>
+                    {% trans "Final Result" %}
+                </h3>
+                <div class="progress-bar final-progess">
+                    <progress id="essay" min="0" max="100" value="{{ final_result }}"></progress>
+                </div>
+            </li>
+        </ul>
+        <div class="exam-duration mt-5">
+            {% trans "Duration You Took to Finish This Exam:" %} &nbsp; <span>{{ duration }}</span>
+        </div>
+
+        <hr class="line-separator mt-4">
+
+        <h3 class="section-header mt-3">
+            {% trans "Correct Answers" %}
+        </h3>
+        <!-- mcq questions -->
+        <h4 class="section-subheader mt-4">
+            {% trans "Multiple Choice Questions" %}
+        </h4>
+        <ul class="exam-take-question-wrapper mt-3">
+            {% for question in exam.mcq_questions.all %}
+                <li class="exam-take-question">
+                    <div class="exam-take-question-counter">
+                        {{ forloop.counter }}
+                    </div>
+                    <div>
+                        {{ question|get_attr_lang:"question"|safe }}
+                    </div>
+                    <div class="error-no-answer form-error" style="display: none; color: var(--danger-dark)"></div>
+                    <ul class="exam-take-question-choices">
+                        {% for choice in question.choiceanswer_set.all %}
+                            {% if choice.is_right %}
+                                <li class="static-checkbox-card radio checked">
+                                    <div></div>
+                                    {{ choice|get_attr_lang:"content" }}
+                                </li>
+                            {% else %}
+                                <li class="static-checkbox-card radio">
+                                    <div></div>
+                                    {{ choice|get_attr_lang:"content" }}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <hr class="line-separator-thin mt-1">
+                    <div class="answer-cause">
+                        <p class="answer-cause-header">
+                            {% trans "Cause" %}:
+                        </p>
+                        <div>
+                            {{ question|get_attr_lang:"cause"|safe }}
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr class="line-separator mt-5">
+        <!-- true-false questions -->
+        <h4 class="section-subheader mt-5">
+            {% trans "True and False Questions" %}
+        </h4>
+        <ul class="exam-take-question-wrapper mt-3">
+            {% for question in exam.true_false_questions.all %}
+                <div class="exam-take-question">
+                    <div class="exam-take-question-counter">
+                        {{ forloop.counter }}
+                    </div>
+                    <div>
+                        {{ question|get_attr_lang:"question"|safe }}
+                    </div>
+                    <div class="error-no-answer form-error" style="display: none; color: var(--danger-dark)"></div>
+                    <ul class="exam-take-question-choices">
+                        {% if question.right_answer == "T" %}
+                            <li class="static-checkbox-card radio checked">
+                                <div></div>
+                                {% trans "True" %}
+                            </li>
+                            <li class="static-checkbox-card radio">
+                                <div></div>
+                                {% trans "False" %}
+                            </li>
+                        {% else %}
+                            <li class="static-checkbox-card radio">
+                                <div></div>
+                                {% trans "True" %}
+                            </li>
+                            <li class="static-checkbox-card radio checked" tabindex="0">
+                                <div></div>
+                                {% trans "False" %}
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <hr class="line-separator-thin mt-1">
+                    <div class="answer-cause">
+                        <p class="answer-cause-header">
+                            {% trans "Cause" %}:
+                        </p>
+                        <div>
+                            {{ question|get_attr_lang:"cause"|safe }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
+        <hr class="line-separator mt-5">
+        <!-- essay questions -->
+        <h4 class="section-subheader mt-5">
+            {% trans "Essay Questions" %}
+        </h4>
+        <ul class="exam-take-question-wrapper mt-3">
+            {% for question in exam.essay_questions.all %}
+                <div class="exam-take-question">
+                    <div class="exam-take-question-counter">
+                        {{ forloop.counter }}
+                    </div>
+                    <div>
+                        {{ question|get_attr_lang:"question"|safe }}
+                    </div>
+                    <div class="error-no-answer form-error" style="display: none; color: var(--danger-dark)"></div>
+                    <hr class="line-separator-thin mt-1">
+                    <div>
+                        <div class="answer-cause mb-1">
+                            <div class="answer-cause-header" style="display: inline-block">
+                                {% trans "Right Answer" %}:
+                            </div>
+                            &nbsp;
+                            <div class="note-text" style="display: inline-block">
+                                ({% trans "note: keywords are highlighted" %})
+                            </div>
+                        </div>
+                        {% for word in question|get_attr_lang:"right_answer"|format_right_answer_essay %}
+                            {% if word in question.essayquestionkeyword_set.all|get_keywords %}
+                                <span class="mark" style="padding-left: 4px; padding-right: 4px; border-radius: 4px">{{ word }}</span>
+                            {% else %}
+                                <span>{{ word }}</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="container full-section">
+        <h3 class="section-header">
+            {% trans "Create New Question" %}
+        </h3>
+        <section class="mt-5">
+            <ul class="add-quastion-choices">
+                <li>
+                    <a class="button {% if type == "mcq" %}bg-secondary{% endif %}" href="{% url 'exam_create_question' "mcq" %}" >
+                        {% trans "MCQ Question" %}
+                    </a>
+                </li>
+                <li>
+                    <a class="button {% if type == "true-false" %}bg-secondary{% endif %}" href="{% url 'exam_create_question' "true-false" %}">
+                        {% trans "True False Question" %}
+                    </a>
+                </li>
+                <li>
+                    <a class="button {% if type == "essay" %}bg-secondary{% endif %}" href="{% url 'exam_create_question' "essay" %}">
+                        {% trans "Essay Question" %}
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <form method="POST">
+            {% if type == "mcq" %}
+                <h4 class="section-subheader">
+                    {% trans "Add MCQ Question" %}
+                </h4>
+            {% elif type == "true-false" %}
+                <h4 class="section-subheader">
+                    {% trans "Add True-False Question" %}
+                </h4>
+            {% else %}
+                <h4 class="section-subheader">
+                    {% trans "Add Essay Question" %}
+                </h4>
+            {% endif %}
+            {% csrf_token %}
+            {% include "common/form.html" with form=form %}
+            {{ form.media }}
+            <button class="submit-button" type="submit">
+                {% trans "Add The Question" %}
+            </button>
+        </form>
+    </section>
+{% endblock teacher_dashboard_content %}

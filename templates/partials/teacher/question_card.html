@@ -1,0 +1,43 @@
+{% load i18n humanize my_filters %}
+
+
+<div class="question-card">
+    <div class="question-content">
+        {{ question|get_attr_lang:"question"|safe }}
+    </div>
+    <div class="quastion-actions sub-navbar">
+
+        {% if not question.is_finish %}
+            <a href="{% url 'exam_question_edit' 'essay' question.id %}" class="button">{% trans "Edit Question" %} <i class="bi bi-pencil-square"></i></a>
+        {% endif %}
+
+        {% if type == "mcq" %}
+            {% if not question.is_finish %}
+                <a href="{% url 'exam_add_mcq_choices' question.id %}" class="button bg-secondary">{% trans "Add Choices" %} <i class="bi bi-plus-lg"></i></a>
+            {% endif %}
+        {% elif type == "essay" %}
+            {% if not question.is_finish %}
+                <a href="{% url 'exam_add_essay_keywords' question.id %}" class="button bg-secondary">{% trans "Add Keywords" %} <i class="bi bi-plus-lg"></i></a>
+            {% endif %}
+        {% endif %}
+
+        {% if exam and not exam.is_finish %}
+            <button data-url="{% url 'exam_remove_question_from_exam' exam.id type question.id %}" class="button bg-danger" onclick="removeQuestionFromExam(this)">
+                {% trans "Remove From This Exam" %} <i class="bi bi-x-lg"></i>
+            </button>
+        {% elif not question.is_finish %}
+            <button data-url="{% url 'exam_question_delete' type question.id %}" class="bg-danger clr-primary-content" onclick="deleteQuestion(this)">
+                {% trans "Delete" %} <i class="bi bi-trash" style="color: inherit"></i>
+            </button>
+        {% endif %}
+        <a href="{% url 'exam_question_details' type question.id %}" class="button">
+            {% trans "See Details" %} <i class="bi bi-info-circle"></i>
+        </a>
+    </div>
+    <div class="question-time">
+        <time datetime="{{ question.created_at }}">
+            {{ question.created_at|naturaltime }}
+        </time>
+        <i class="bi bi-clock"></i>
+    </div>
+</div>

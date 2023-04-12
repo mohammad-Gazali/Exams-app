@@ -8,7 +8,7 @@
             <h3 class="section-subheader">
                 {% trans "My Exams" %}
             </h3>
-            <div class="exams-container {% if page_obj %}mt-4{% endif %}">
+            <div class="exams-teacher-container {% if page_obj %}mt-4{% endif %}">
                 {% for exam in page_obj %}
                     {% include "partials/teacher/exam_card.html" with exam=exam %}
                 {% empty %}
@@ -17,7 +17,7 @@
                     </div>
                 {% endfor %}
             </div>
-            {% if page_obj %} {% comment %} TODO: continue this condition {% endcomment %}
+            {% if page_obj %}
                 {% include "partials/pagination.html" with page_obj=page_obj %}
             {% endif %}
         </section>
@@ -33,7 +33,7 @@
             Swal.fire({
                 icon: 'warning',
                 title: '{% trans "Warning!" %}',
-                text: `{% trans "Are You Sure You Want To Remove" %} ${button.dataset.name}`,
+                text: `{% trans "Are You Sure You Want To Delete" %} ${button.dataset.name}`,
                 showConfirmButton: false,
                 showDenyButton: true,
                 denyButtonText: '{% trans "Yes" %}',

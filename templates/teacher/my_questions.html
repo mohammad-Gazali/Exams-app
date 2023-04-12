@@ -5,25 +5,76 @@
 {% block teacher_dashboard_content %}
     {% if teacher.is_active %}
         <section class="full-section container">
-            <h3 class="section-subheader">
-                {% trans "My Questions" %}
-            </h3>
-            {% if questions_number != 0 %}
-                {% for question in mcq_page_obj %}
-                    {{ question }}
-                {% endfor %}
-                {% for question in true_false_page_obj %}
-                    {{ question }}
-                {% endfor %}
-                {% for question in essay_page_obj %}
-                    {{ question }}
-                {% endfor %}
-            {% else %}
-                <div class="empty-content-text">
-                    {% trans "You Haven't Created Any Question Yet" %} <i class="bi bi-emoji-frown"></i>
-                </div>
+            <div class="sub-navbar">
+                <a href="{% url 'teacher_questions' "mcq" %}" class="button {% if type == "mcq" %}bg-primary-light{% endif %}">{% trans "MCQ Questions" %}</a>
+                <a href="{% url 'teacher_questions' "true-false" %}" class="button {% if type == "true-false" %}bg-primary-light{% endif %}">{% trans "True-False Questions" %}</a>
+                <a href="{% url 'teacher_questions' "essay" %}" class="button {% if type == "essay" %}bg-primary-light{% endif %}">{% trans "Essay Questions" %}</a>
+            </div>
+            <div class="mt-3">
+                {% if type == "mcq" %}
+                    <h3 class="section-subheader">
+                        {% trans "My MCQ Questions" %}
+                    </h3>
+                    <div class="teacher-question-wrapper">
+                        {% for question in page_obj %}
+                            {% include "partials/teacher/question_card.html" with question=question type=type %}
+                        {% empty %}
+                            <div class="empty-content-text">
+                                {% trans "You Haven't Created Any MCQ Question Yet" %} <i class="bi bi-emoji-frown"></i>
+                            </div>
+                        {% endfor %}
+                    </div>     
+                {% elif type == "true-false" %}
+                    <h3 class="section-subheader">
+                        {% trans "My True-False Questions" %}
+                    </h3>
+                    <div class="teacher-question-wrapper">
+                        {% for question in page_obj %}
+                            {% include "partials/teacher/question_card.html" with question=question type=type %}
+                        {% empty %}
+                            <div class="empty-content-text">
+                                {% trans "You Haven't Created Any True-False Question Yet" %} <i class="bi bi-emoji-frown"></i>
+                            </div>
+                        {% endfor %}
+                    </div>             
+                {% else %}
+                    <h3 class="section-subheader">
+                        {% trans "My Essay Questions" %}
+                    </h3>
+                    <div class="teacher-question-wrapper">
+                        {% for question in page_obj %}
+                            {% include "partials/teacher/question_card.html" with question=question type=type %}
+                        {% empty %}
+                            <div class="empty-content-text">
+                                {% trans "You Haven't Created Any Essay Question Yet" %} <i class="bi bi-emoji-frown"></i>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            {% if page_obj %}
+                {% include "partials/pagination.html" with page_obj=page_obj %}
             {% endif %}
         </section>
+        <script>
+            function deleteQuestion(button) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '{% trans "Warning!" %}',
+                    text: `{% trans "Are You Sure You Want To Delete This Question" %}`,
+                    showConfirmButton: false,
+                    showDenyButton: true,
+                    denyButtonText: '{% trans "Yes" %}',
+                    showCancelButton: true,
+                    cancelButtonText: '{% trans "No" %}',
+                    
+                }).then((result) => {
+                    if (result.isDenied) {
+                        window.location.replace(button.dataset.url)
+                    }
+                })
+            }
+        </script>
     {% else %}
         <section class="float-section">
             <p class="section-subheader clr-secondary text-center">

@@ -1,5 +1,5 @@
 {% extends 'teacher/teacher_dashboard_base.html' %}
-{% load static i18n %}
+{% load static i18n my_filters %}
 
 
 {% block teacher_dashboard_content %}
@@ -7,16 +7,9 @@
         <h3 class="section-subheader">
             {% trans "Adding MCQ Choices" %}
         </h3>
-        <ul id="choices-list">
+        <ul class="choice-wrapper mt-2" id="choices-list">
             {% for choice in question.choiceanswer_set.all %}
-                <li>
-                    {{ choice.content_english }}
-                    {% if choice.is_right %}
-                        right
-                    {% else %}
-                        wrong
-                    {% endif %}
-                </li>
+                {% include "partials/teacher/choice_card.html" with choice=choice %}
             {% endfor %}
         </ul>
         <form action="{% url 'ajax_add_mcq_choice' %}" id="add-choice-form" method="POST">
@@ -60,6 +53,16 @@
                     confirmButtonColor: '#004c98',
                 })
 
+            } else if (data.error === "choice_repeated") {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: '{% trans "Repeated Answer" %}',
+                    text: data.message,
+                    confirmButtonText: '{% trans "OK" %}',
+                    confirmButtonColor: '#004c98',
+                })
+
             } else if (data.error === "non-valid_form") {
                 
                 Swal.fire({
@@ -90,17 +93,40 @@
                 })
 
             } else if (data.message === "success") {
+
                 const { new_choice } = data;
 
                 const newChoiceChild = document.createElement("li");
 
-                newChoiceChild.innerHTML = `${new_choice.content_english} ${new_choice.is_right ? "right" : "wrong"}`
+                newChoiceChild.className = `choice-card ${new_choice.is_right ? "right" : "wrong"}`
+
+                newChoiceChild.innerHTML = `<div>${new_choice.is_right ? '<i class="bi bi-check-circle-fill"></i>' : '<i class="bi bi-x-circle-fill"></i>'} ${new_choice.content}</div><button onclick="deleteMCQChoice(this)" data-id="${new_choice.id}">{% trans "Remove" %}</button>`
 
                 choicesList.insertBefore(newChoiceChild, choicesList.firstChild);
 
                 addChoiceForm.reset()
             }
 
+        }
+
+        async function deleteMCQChoice(button) {
+            const response = await fetch("{% url 'ajax_delete_mcq_choice' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({
+                    question_id: "{{ question.id }}",
+                    choice_id: button.dataset.id
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.state === "success") {
+                button.closest("li").remove()
+            }
         }
     </script>
 {% endblock teacher_dashboard_content %}

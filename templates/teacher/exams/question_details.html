@@ -1,0 +1,116 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n my_filters %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="full-section container">
+        <h3 class="section-header">
+            {% trans "Question Details" %}
+        </h3>
+        <table class="primary-table mt-2">
+            <tbody>
+                <tr>
+                    <th>{% trans "Id" %}</th>
+                    <td>{{ question.id }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Created at" %}</th>
+                    <td>{{ question.created_at }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Is Finish" %}</th>
+                    <td>{{ question.is_finish }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Question Type" %}</th>
+                    {% if type == "mcq" %}
+                        <td>{% trans "MCQ Question" %}</td>
+                    {% elif type == "true-false" %}
+                        <td>{% trans "True-False Question" %}</td>
+                    {% else %}
+                        <td>{% trans "Essay Question" %}</td>
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+        <h4 class="section-subheader mt-4">
+            {% trans "Question English" %}
+        </h4>
+        <div>
+            {{ question.question_english|safe }}
+        </div>
+        <h4 class="section-subheader mt-2">
+            {% trans "Question Arabic" %}
+        </h4>
+        <div>
+            {{ question.question_arabic|safe }}
+        </div>
+        <hr class="line-separator mt-4">
+        {% if type == "essay" %}
+            <h4 class="section-subheader mt-4">
+                {% trans "Right Answer English" %}
+            </h4>
+            <div>
+                {{ question.right_answer_english }}
+            </div>
+            <h4 class="section-subheader mt-2">
+                {% trans "Right Answer Arabic" %}
+            </h4>
+            <div>
+                {{ question.right_answer_arabic }}
+            </div>
+        {% else %}
+            <h4 class="section-subheader mt-4">
+                {% trans "Answer Cause English" %}
+            </h4>
+            <div>
+                {{ question.cause_english|safe }}
+            </div>
+            <h4 class="section-subheader mt-2">
+                {% trans "Answer Cause Arabic" %}
+            </h4>
+            <div>
+                {{ question.cause_arabic|safe }}
+            </div>
+        {% endif %}
+        <hr class="line-separator mt-4">
+        {% if type == "mcq" %}
+            <h4 class="section-subheader mt-3">
+                {% trans "Question Choices" %}
+            </h4>
+            <ul class="choice-wrapper mt-1">
+                {% for choice in question.choiceanswer_set.all %}
+                    {% include "partials/teacher/choice_card.html" with choice=choice no_remove=True %}
+                {% empty %}
+                    <p class="empty-content-text">
+                        {% trans "No Choices" %}
+                    </p>
+                {% endfor %}
+            </ul>
+        {% elif type == "true-false" %}
+            <h4 class="section-subheader mt-5">
+                {% trans "Question Right Answer" %}
+            </h4>
+            <p class="subsection-header" style="{% if question.get_right_answer_display == "False" %}color: var(--danger-main);{% endif %}font-weight: 700">
+                {{ question.get_right_answer_display }}
+            </p>
+        {% else %}
+            <h4 class="section-subheader mt-5">
+                {% trans "Question Keywords" %}
+            </h4>
+            <ul class="keywords-wrapper mt-2" id="keywords-wrapper">
+                {% for keyword in question.essayquestionkeyword_set.all %}
+                    <li class="keywords-pair">
+                        <div>
+                            {{ keyword.content_english }}&nbsp; | | &nbsp;{{ keyword.content_arabic }}
+                        </div>
+                    </li>
+                {% empty %}
+                    <p class="empty-content-text">
+                        {% trans "No Choices" %}
+                    </p>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </section>
+{% endblock teacher_dashboard_content %}

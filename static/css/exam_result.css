@@ -1,0 +1,84 @@
+@property --progress-value {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+}
+
+.progress-block-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+.progress-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--primary-dark);
+}
+
+.progress-block h4 {
+    font-size: 1.4rem;
+}
+
+.progress-bar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background:
+        radial-gradient(closest-side, white 79%, transparent 80% 100%),
+        conic-gradient(var(--progress-color) calc(var(--progress-value) * 1%), var(--progress-color-light) 0);
+
+    /* to center the percentage value */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-bar::before {
+    counter-reset: percentage var(--progress-value);
+    content: counter(percentage) '%';
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--progress-color);
+    animation: inherit;
+}
+
+.mcq-progess {
+    animation: mcq-progress 2s 1 forwards;
+}
+
+.true-false-progess {
+    animation: true-false-progress 2s 1 forwards;
+}
+
+.essay-progess {
+    animation: essay-progress 2s 1 forwards;
+}
+
+.final-progess {
+    animation: final-progress 2s 1 forwards;
+}
+
+.progress-bar progress {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+.exam-duration {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.exam-duration span {
+    color: var(--primary-main);
+}
+
+.answer-cause .answer-cause-header {
+    color: var(--secondary-dark);
+    font-weight: 700;
+}

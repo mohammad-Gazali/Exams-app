@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load i18n my_filters %}
+
+
+{% block title %}
+    {% trans "Taking Exam" %}
+{% endblock title %}
+
+{% block hero %}{% endblock hero %}
+
+{% block content %}
+    <section class="full-section container">
+        <h3 class="section-header">
+            {% trans "Taking Exam" %}
+        </h3>
+        <form id="take-exam-form" method="POST">
+            {% csrf_token %}
+            <!-- start time -->
+            <input name="start-time" type="hidden" value="{{ start_time }}">
+            <!-- mcq questions -->
+            <h4 class="section-subheader">
+                {% trans "Multiple Choice Questions" %}
+            </h4>
+            <ul class="exam-take-question-wrapper mt-3">
+                {% for question in exam.mcq_questions.all %}
+                    <li class="exam-take-question">
+                        <div class="exam-take-question-counter">
+                            {{ forloop.counter }}
+                        </div>
+                        <div>
+                            {{ question|get_attr_lang:"question"|safe }}
+                        </div>
+                        <div class="error-no-answer form-error" style="display: none; color: var(--danger-dark)"></div>
+                        <ul class="exam-take-question-choices">
+                            {% for choice in question.choiceanswer_set.all %}
+                                <li class="checkbox-card radio" tabindex="0">
+                                    <input type="radio" id="{{ choice.id }}" name="mcq_{{ question.id }}" value="{{ choice.id }}"/>
+                                    <label for="{{ choice.id }}">{{ choice|get_attr_lang:"content" }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+            <hr class="line-separator mt-5">
+            <!-- true-false questions -->
+            <h4 class="section-subheader mt-5">
+                {% trans "True and False Questions" %}
+            </h4>
+            <ul class="exam-take-question-wrapper mt-3">
+                {% for question in exam.true_false_questions.all %}
+                    <div class="exam-take-question">
+                        <div class="exam-take-question-counter">
+                            {{ forloop.counter }}
+                        </div>
+                        <div>
+                            {{ question|get_attr_lang:"question"|safe }}
+                        </div>
+                        <div class="error-no-answer form-error" style="display: none; color: var(--danger-dark)"></div>
+                        <ul class="exam-take-question-choices">
+                            <li class="checkbox-card radio" tabindex="0">
+                                <input type="radio" id="{{ choice.id }}" name="true-false_{{ question.id }}" value="True"/>
+                                <label for="{{ choice.id }}">{% trans "True" %}</label>
+                            </li>
+                            <li class="checkbox-card radio" tabindex="0">
+                                <input type="radio" id="{{ choice.id }}" name="true-false_{{ question.id }}" value="False"/>
+                                <label for="{{ choice.id }}">{% trans "False" %}</label>
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </ul>
+            <hr class="line-separator mt-5">
+            <!-- essay questions -->
+            <h4 class="section-subheader mt-5">
+                {% trans "Essay Questions" %}
+            </h4>
+            <ul class="exam-take-question-wrapper mt-3">
+                {% for question in exam.essay_questions.all %}
+                    <div class="exam-take-question">
+                        <div class="exam-take-question-counter">
+                            {{ forloop.counter }}
+                        </div>
+                        <div>
+                            {{ question|get_attr_lang:"question"|safe }}
+                        </div>
+                        <div class="error-no-answer form-error" style="display: none; color: var(--danger-dark)"></div>
+                        <textarea class="exam-take-textarea" name="essay_{{ question.id }}" rows="6" placeholder="{% trans "Write Your Answer" %}..."></textarea>
+                    </div>
+                {% endfor %}
+            </ul>
+            <hr class="line-separator mt-5">
+            <button class="submit-button" type="submit">
+                {% trans "Submit The Answers" %}
+            </button>
+        </form>
+        <script>
+            const takeExamForm = document.getElementById("take-exam-form");
+
+            takeExamForm.onsubmit = (e) => {
+                e.preventDefault();
+                const formElements = Array.from(e.srcElement)
+
+                let error = false;
+
+                for (let i = 0; i < formElements.length - 1; i++) {
+                    const element = formElements[i];
+                    const sameNameElements = formElements.filter(el => el.name === element.name);
+                    const hasChecked = sameNameElements.some(el => el.checked);
+
+                    if (element.type === "radio" && !hasChecked) {
+                        const inputQuestion = element.closest(".exam-take-question")
+                        inputQuestion.scrollIntoView({ block: 'center', inline: 'center' });
+                        
+                        const errorField = inputQuestion.querySelector(".error-no-answer")
+                        errorField.innerHTML = '{% trans "You Need To Answer To This Question." %}';
+                        errorField.style.display = "block";
+                        error = true;
+                        break;
+
+                    } else if (element.type === "textarea" && !element.value) {
+
+                        const inputQuestion = element.closest(".exam-take-question")
+                        inputQuestion.scrollIntoView({ block: 'center', inline: 'center' });
+                        
+                        const errorField = inputQuestion.querySelector(".error-no-answer")
+                        errorField.innerHTML = '{% trans "You Need To Answer To This Question." %}';
+                        errorField.style.display = "block";
+                        error = true;
+                        break;   
+                    }
+                }
+
+                if (!error) {
+                    e.target.submit();
+                }
+            }
+        </script>
+    </section>
+{% endblock content %}

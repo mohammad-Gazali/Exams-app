@@ -1,5 +1,5 @@
 {% extends 'teacher/teacher_dashboard_base.html' %}
-{% load static i18n %}
+{% load static i18n my_filters %}
 
 
 {% block teacher_dashboard_content %}
@@ -10,22 +10,22 @@
         <section class="mt-5">
             <ul class="add-quastion-choices">
                 <li>
-                    <a class="button {% if type == "mcq" %}bg-secondary{% endif %}" href="{% url 'exam_add_quastions' exam.id "mcq" %}" >
+                    <a class="button" href="{% url 'exam_add_quastions' exam.id "mcq" %}" >
                         {% trans "MCQ Question" %}
                     </a>
                 </li>
                 <li>
-                    <a class="button {% if type == "true-false" %}bg-secondary{% endif %}" href="{% url 'exam_add_quastions' exam.id "true-false" %}">
+                    <a class="button" href="{% url 'exam_add_quastions' exam.id "true-false" %}">
                         {% trans "True False Question" %}
                     </a>
                 </li>
                 <li>
-                    <a class="button {% if type == "essay" %}bg-secondary{% endif %}" href="{% url 'exam_add_quastions' exam.id "essay" %}">
+                    <a class="button" href="{% url 'exam_add_quastions' exam.id "essay" %}">
                         {% trans "Essay Question" %}
                     </a>
                 </li>
                 <li>
-                    <a class="button" href="{% url 'exam_add_quastions_created_before' exam.id %}">
+                    <a class="button bg-secondary" href="{% url 'exam_add_quastions_created_before' exam.id %}">
                         {% trans "Question Created Before" %}
                     </a>
                 </li>
@@ -33,24 +33,59 @@
         </section>
         <section>
             <form method="POST">
-                {% if type == "mcq" %}
-                    <h4 class="section-subheader">
-                        {% trans "Add MCQ Question" %}
-                    </h4>
-                {% elif type == "true-false" %}
-                    <h4 class="section-subheader">
-                        {% trans "Add True-False Question" %}
-                    </h4>
-                {% else %}
-                    <h4 class="section-subheader">
-                        {% trans "Add Essay Question" %}
-                    </h4>
-                {% endif %}
+                <h4 class="section-subheader">
+                    {% trans "Add Questions You Created Before" %}
+                </h4>
                 {% csrf_token %}
-                {% include "common/form.html" with form=form %}
-                {{ form.media }}
+                <div class="subsections-wrapper">
+                    {% if mcq_questions %}
+                        <section class="subsection">
+                            <h5 class="subsection-header">
+                                {% trans "MCQ" %}
+                            </h5>
+                            <div class="checkbox-card-wrapper">
+                                {% for question in mcq_questions %}
+                                    <div class="checkbox-card">
+                                        <input type="checkbox" id="{{ question.id }}" name="mcq_{{ question.id }}" />
+                                        <label for="{{ question.id }}">{{ question|get_attr_lang:"question"|safe }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </section>
+                    {% endif %}
+                    {% if true_false_questions %}
+                        <section class="subsection">
+                            <h5 class="subsection-header">
+                                {% trans "true-false" %}
+                            </h5>
+                            <div class="checkbox-card-wrapper">
+                                {% for question in true_false_questions %}
+                                    <div class="checkbox-card">
+                                        <input type="checkbox" id="{{ question.id }}" name="true-false_{{ question.id }}" />
+                                        <label for="{{ question.id }}">{{ question|get_attr_lang:"question"|safe }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </section>
+                    {% endif %}
+                    {% if essay_questions %}
+                        <section class="subsection">
+                            <h5 class="subsection-header">
+                                {% trans "essay" %}
+                            </h5>
+                            <div class="checkbox-card-wrapper">
+                                {% for question in essay_questions %}
+                                    <div class="checkbox-card">
+                                        <input type="checkbox" id="{{ question.id }}" name="essay_{{ question.id }}" />
+                                        <label for="{{ question.id }}">{{ question|get_attr_lang:"question"|safe }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </section>
+                    {% endif %}
+                </div>
                 <button class="submit-button" type="submit">
-                    {% trans "Add The Question" %}
+                    {% trans "Add The Questions" %}
                 </button>
             </form>
         </section>
@@ -59,7 +94,7 @@
             <h3 class="section-header">
                 {% trans "Exam's Question" %}
             </h3>
-            {% if questions_number == 0 %}
+            {% if quastions_number == 0 %}
                 <p class="section-subheader text-center clr-danger bg-danger-light w-fit rounded-sm p-2 mx-auto">
                     {% trans "This exam doesn't have any questions so far." %}
                 </p>

@@ -9,10 +9,9 @@
         </h2>
         <form method="POST">
             {% csrf_token %}
-            {% comment %} TODO: determining currency {% endcomment %}
             {% include "common/form.html" with form=form %}
             <button class="submit-button" type="submit">
-                Create <i class="bi bi-plus-circle"></i>
+                {% trans "Create" %} <i class="bi bi-plus-circle"></i>
             </button>
         </form>
     </section>

@@ -1,0 +1,97 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="full-section container">
+        <h4 class="section-header">
+            {% trans "Exam Details" %}
+        </h4>
+        <table class="primary-table mt-5">
+            <tbody>
+                <tr>
+                    <th>{% trans "Id" %}</th>
+                    <td>{{ exam.id }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "English Name" %}</th>
+                    <td>{{ exam.name_english }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Arabic Name" %}</th>
+                    <td>{{ exam.name_arabic }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Price" %}</th>
+                    <td>{{ exam.price }}$</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Create at" %}</th>
+                    <td>{{ exam.created_at }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Is Demo" %}</th>
+                    <td>{{ exam.is_demo }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Is Active" %}</th>
+                    <td>{{ exam.is_active }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Is Finish" %}</th>
+                    <td>{{ exam.is_finish }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4 class="section-subheader mt-4">
+            {% trans "English Description" %}
+        </h4>
+        <div>
+            {{ exam.description_english }}
+        </div>
+        <h4 class="section-subheader mt-2">
+            {% trans "Arabic Description" %}
+        </h4>
+        <div>
+            {{ exam.description_arabic }}
+        </div>
+        <h4 class="section-subheader mt-5">
+            {% trans "MCQ Questions" %}
+        </h4>
+        <div class="teacher-question-wrapper mt-1">
+            {% for mcq_question in exam.mcq_questions.all %}
+                {% include "partials/teacher/question_card.html" with question=mcq_question exam=exam type="mcq" %}
+            {% empty %}
+                <div class="empty-content-text">
+                    {% trans "No MCQ Questions In This Exam" %}
+                </div>
+            {% endfor %}
+        </div>
+        <hr class="line-separator-thin mt-5">
+        <h4 class="section-subheader mt-3">
+            {% trans "True-False Questions" %}
+        </h4>
+        <div class="teacher-question-wrapper mt-1">
+            {% for true_false_question in exam.true_false_questions.all %}
+                {% include "partials/teacher/question_card.html" with question=true_false_question exam=exam type="true-false" %}
+            {% empty %}
+                <div class="empty-content-text">
+                    {% trans "No True-False Questions In This Exam" %}
+                </div>
+            {% endfor %}
+        </div>
+        <hr class="line-separator-thin mt-4">
+        <h4 class="section-subheader mt-3">
+            {% trans "Essay Questions" %}
+        </h4>
+        <div class="teacher-question-wrapper mt-1">
+            {% for essay_question in exam.essay_questions.all %}
+                {% include "partials/teacher/question_card.html" with question=essay_question exam=exam type="essay" %}
+            {% empty %}
+                <div class="empty-content-text">
+                    {% trans "No Essay Questions In This Exam" %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock teacher_dashboard_content %}

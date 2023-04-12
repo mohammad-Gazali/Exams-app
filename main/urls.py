@@ -12,5 +12,5 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('teacher', views.teacher_main, name='teacher'),
     path('teacher/exams', views.teacher_exams, name='teacher_exams'),
-    path('teacher/questions', views.teacher_questions, name='teacher_questions'),
+    path('teacher/questions/<str:q_type>', views.teacher_questions, name='teacher_questions'),
 ]

@@ -53,17 +53,47 @@
                 </div>
             </div>
         </section>
-        <form action="{% url 'contact' %}" method="POST" class="float-section contact-form">
-            <h3 class="section-header">
-                {% trans "Sending Email" %}
-            </h3>
-            {% csrf_token %}
-            {% include 'common/form.html' with form=form %}
-            {% comment %} TODO: add preventing to the non-authenticated users {% endcomment %}
-            <button type="submit" class="submit-button below-captcha">
-                <i class="bi bi-send"></i>
-                {% trans "Send" %}
-            </button>
-        </form>
+        {% if user.is_authenticated %}
+            <form action="{% url 'contact' %}" method="POST" class="float-section contact-form">
+                <h3 class="section-header">
+                    {% trans "Sending Email" %}
+                </h3>
+                {% csrf_token %}
+                {% include 'common/form.html' with form=form %}
+                <button type="submit" class="submit-button below-captcha">
+                    <i class="bi bi-send"></i>
+                    {% trans "Send" %}
+                </button>
+            </form>
+        {% else %}
+            <form action="#" class="float-section contact-form" id="fake-form">
+                <h3 class="section-header">
+                    {% trans "Sending Email" %}
+                </h3>
+                {% csrf_token %}
+                {% include 'common/form.html' with form=form %}
+                <button type="button" class="submit-button below-captcha" onclick="showLoginRequiredAlert()">
+                    <i class="bi bi-send"></i>
+                    {% trans "Send" %}
+                </button>
+            </form>
+        {% endif %}
     </section>
+    <script>
+        const fakeForm = document.getElementById("fake-form");
+
+        fakeForm.onsubmit = (e) => {
+            e.preventDefault();
+        }
+
+        function showLoginRequiredAlert() {
+            Swal.fire({
+                icon: 'error',
+                title: '{% trans "Login Required" %}',
+                text: '{% trans "You Should Login Before Sending Contact Email." %}',
+                confirmButtonText: '{% trans "OK" %}',
+                confirmButtonColor: '#004c98',
+            })
+        }
+    </script>
 {% endblock content %}

@@ -8,6 +8,7 @@ import uuid
 
 class MultipleChoiceQuestion(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    is_finish = models.BooleanField(default=False, verbose_name=_("is finish"))
     question_english = RichTextUploadingField(verbose_name=_("question english"))
     question_arabic = RichTextUploadingField(verbose_name=_("question arabic"))
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, verbose_name=_("teacher"), null=True, blank=True)
@@ -45,6 +46,7 @@ class TrueFlaseAnswers(models.TextChoices):
 
 class TrueFalseQuestion(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    is_finish = models.BooleanField(default=False, verbose_name=_("is finish"))
     question_english = RichTextUploadingField(verbose_name=_("question english"))
     question_arabic = RichTextUploadingField(verbose_name=_("question arabic"))
     right_answer = models.CharField(max_length=1, choices=TrueFlaseAnswers.choices, verbose_name=_("right answer"))
@@ -62,11 +64,12 @@ class TrueFalseQuestion(models.Model):
 
 class EssayQuestion(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    is_finish = models.BooleanField(default=False, verbose_name=_("is finish"))
     question_english = RichTextUploadingField(verbose_name=_("question english"))
     question_arabic = RichTextUploadingField(verbose_name=_("question arabic"))
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, verbose_name=_("teacher"), null=True, blank=True)
-    right_answer_english = RichTextUploadingField(verbose_name=_("right answer english"))
-    right_answer_arabic = RichTextUploadingField(verbose_name=_("right answer arabic"))
+    right_answer_english = models.TextField(verbose_name=_("right answer english"))
+    right_answer_arabic = models.TextField(verbose_name=_("right answer arabic"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created at"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("updated at"))
 
@@ -76,9 +79,11 @@ class EssayQuestion(models.Model):
         ordering = ['-created_at']
 
 
-class EssayQuestoionKeyword(models.Model):
+class EssayQuestionKeyword(models.Model):
     content_english = models.CharField(max_length=255, verbose_name=_("content english"))
     content_arabic = models.CharField(max_length=255, verbose_name=_("content arabic"))
+    english_word_index = models.IntegerField(default=0)
+    arabic_word_index = models.IntegerField(default=0)
     question = models.ForeignKey(EssayQuestion, on_delete=models.CASCADE, verbose_name=_("question"))
 
     class Meta:
@@ -108,6 +113,21 @@ class Exam(models.Model):
         verbose_name = _("exam")
         verbose_name_plural = _("exams")
         ordering = ['-created_at']
+
+
+class TakingExamSession(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE, verbose_name=_("exam"))
+    student = models.ForeignKey(NormalUser, on_delete=models.CASCADE, verbose_name=_("student"))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created at"))
+    mcq_result = models.IntegerField(verbose_name=_("mcq_result"))  # type: ignore
+    true_false_result = models.IntegerField(verbose_name=_("true_false_result"))  # type: ignore
+    essay_result = models.IntegerField(verbose_name=_("essay_result"))  # type: ignore
+    final_result = models.IntegerField(verbose_name=_("final_result"))  # type: ignore
+    duration = models.DurationField(verbose_name=_("duration"))
+
+    class Meta:
+        verbose_name = _("taking exam session")
+        verbose_name_plural = _("taking exam sessions")
 
 
 class ExamsGroup(models.Model):

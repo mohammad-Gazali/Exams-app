@@ -1,6 +1,7 @@
 {% extends 'teacher/teacher_dashboard_base.html' %}
 {% load static i18n %}
 
+
 {% block teacher_dashboard_content %}
     <section class="container full-section">
         <h2 class="section-header">
@@ -8,10 +9,9 @@
         </h2>
         <form method="POST">
             {% csrf_token %}
-            {% comment %} TODO: determining currency {% endcomment %}
             {% include "common/form.html" with form=form %}
             <button class="submit-button" type="submit">
-                Update <i class="bi bi-pencil-square"></i>
+                {% trans "Update" %} <i class="bi bi-pencil-square"></i>
             </button>
         </form>
     </section>

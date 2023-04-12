@@ -1,0 +1,25 @@
+{% load i18n my_filters %}
+
+{% if choice.is_right %}
+    <li class="choice-card right">
+        <div>
+            <i class="bi bi-check-circle-fill"></i> {{ choice|get_attr_lang:"content" }}
+        </div>
+        {% if not no_remove %}
+            <button onclick="deleteMCQChoice(this)" data-id="{{ choice.id }}">
+                {% trans "Remove" %} <i class="bi bi-trash"></i>
+            </button>
+        {% endif %}
+    </li>
+{% else %}
+    <li class="choice-card wrong">
+        <div>
+            <i class="bi bi-x-circle-fill"></i> {{ choice|get_attr_lang:"content" }}
+        </div>
+        {% if not no_remove %}
+            <button onclick="deleteMCQChoice(this)" data-id="{{ choice.id }}">
+                {% trans "Remove" %} <i class="bi bi-trash"></i>
+            </button>
+        {% endif %}
+    </li>
+{% endif %}

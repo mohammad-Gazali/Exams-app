@@ -1,10 +1,10 @@
-{% load i18n humanize %}
+{% load i18n humanize my_filters %}
 
 
 <div class="teacher-exam-card">
     <div class="card-head">
         <h4 class="card-title">
-            {{ exam.name_english }}
+            {{ exam|get_attr_lang:"name" }}
         </h4>
         <ul class="card-badge-container">
     
@@ -42,20 +42,35 @@
     </div>
     <div class="card-body">
         <p class="card-text">
-            {{ exam.description_english }}
+            {{ exam|get_attr_lang:"description" }}
         </p>
     </div>
     <div class="card-end">
         <div class="card-actions">
-            <a href="{% url 'exam_edit' exam.id %}" class="button clr-primary-content">
-                {% trans "Edit Exam" %} <i class="bi bi-pencil-square" style="color: inherit"></i>
+            {% if not exam.is_active %}
+                <a href="{% url 'exam_edit' exam.id %}" class="button clr-primary-content">
+                    {% trans "Edit Exam" %} <i class="bi bi-pencil-square" style="color: inherit"></i>
+                </a>
+                <button data-url="{% url 'exam_delete' exam.id %}" data-name="{{ exam|get_attr_lang:"name" }}" class="bg-danger clr-primary-content" onclick="deleteExam(this)">
+                    {% trans "Delete" %} <i class="bi bi-trash" style="color: inherit"></i>
+                </button>
+            {% endif %}
+            {% if not exam.is_finish %}
+                <a href="{% url 'exam_add_quastions' exam.id "mcq" %}" class="button bg-secondary clr-primary-content">
+                    {% trans "Add Questions" %} <i class="bi bi-plus-lg" style="color: inherit"></i>
+                </a>
+                <a href="{% url 'exam_finish' exam.id %}" class="button bg-primary-light">
+                    {% trans "Finish The Exam" %} <i class="bi bi-check-circle"></i>
+                </a>
+            {% endif %}
+            {% if exam.is_finish %}
+                <a href="{% url 'exam_take_exam' exam.id %}" class="button bg-secondary">
+                    {% trans "Try Taking The Exam" %} <i class="bi bi-ui-checks" style="color: inherit"></i>
+                </a>
+            {% endif %}
+            <a href="{% url 'exam_details' exam.id %}" class="button {% if exam.is_finish %}bg-primary-light{% endif %}">
+                {% trans "Exam's Details" %} <i class="bi bi-info-circle" style="color: inherit"></i>
             </a>
-            <a href="{% url 'exam_add_quastions' exam.id %}" class="button bg-secondary clr-primary-content">
-                {% trans "Add Questions" %} <i class="bi bi-plus-lg" style="color: inherit"></i>
-            </a>
-            <button data-url="{% url 'exam_delete' exam.id %}" data-name="{{ exam.name_english }}" class="bg-danger clr-primary-content" onclick="deleteExam(this)">
-                {% trans "Delete" %} <i class="bi bi-trash" style="color: inherit"></i>
-            </button>
         </div>
         <span>
             <time datetime="{{ exam.created_at }}">

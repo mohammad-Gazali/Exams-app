@@ -1,0 +1,29 @@
+{% extends 'teacher/teacher_dashboard_base.html' %}
+{% load static i18n %}
+
+
+{% block teacher_dashboard_content %}
+    <section class="full-section container">
+        {% if type == "mcq" %}
+            <h4 class="section-subheader">
+                {% trans "Edit MCQ Question" %}
+            </h4>
+        {% elif type == "true-false" %}
+            <h4 class="section-subheader">
+                {% trans "Edit True-False Question" %}
+            </h4>
+        {% else %}
+            <h4 class="section-subheader">
+                {% trans "Edit Essay Question" %}
+            </h4>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            {% include "common/form.html" with form=form %}
+            {{ form.media }}
+            <button class="submit-button" type="submit">
+                {% trans "Edit The Question" %}
+            </button>
+        </form>
+    </section>
+{% endblock teacher_dashboard_content %}
