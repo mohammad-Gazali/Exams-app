@@ -16,7 +16,7 @@
                         <div>
                             {{ keyword.content_english }}&nbsp; | | &nbsp;{{ keyword.content_arabic }}
                         </div>
-                        <span class="delete-keyword-button" data-id="{{ keyword.id }}">
+                        <span class="delete-keyword-button" data-id="{{ keyword.id }}" onclick="deleteKeyword(this)">
                             <i class="bi bi-x-lg"></i>
                         </span>
                     </li>
@@ -151,7 +151,7 @@
                     newChild.innerHTML = `<div>
                         ${data.new_keyword_data.keyword_english}&nbsp; | | &nbsp;${data.new_keyword_data.keyword_arabic}
                     </div>
-                    <span class="delete-keyword-button" data-id="${data.new_keyword_data.id}">
+                    <span class="delete-keyword-button" data-id="${data.new_keyword_data.id}" onclick="deleteKeyword(this)">
                         <i class="bi bi-x-lg"></i>
                     </span>`
 
@@ -175,27 +175,25 @@
             }
         }
 
-        deleteKeywordBtns.forEach(btn => {
-            btn.onclick = async () => {
-
-                const response = await fetch("{% url 'ajax_delete_essay_keyword' %}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": "{{ csrf_token }}"
-                    },
-                    body: JSON.stringify({ 
-                        keyword_id: btn.dataset.id,
-                        question_id: "{{ question.id }}"
-                    })
+        async function deleteKeyword(btn) {
+            const response = await fetch("{% url 'ajax_delete_essay_keyword' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ 
+                    keyword_id: btn.dataset.id,
+                    question_id: "{{ question.id }}"
                 })
+            })
 
-                const data = await response.json();
+            const data = await response.json();
 
-                if (data.state === "success") {
-                    btn.closest(".keywords-pair").remove();
-                }
+            if (data.state === "success") {
+                btn.closest(".keywords-pair").remove();
             }
-        })
+        }
+        
     </script>
 {% endblock teacher_dashboard_content %}
