@@ -1673,18 +1673,6 @@ footer #copy-right {
     border: 1px solid var(--secondary);
 }
 
-.static-checkbox-card.wrong {
-    background-color: var(--danger-light);
-    border-color: var(--danger-main);
-}
-
-.static-checkbox-card.wrong div::before {
-    content: "\F62A";
-    color: var(--danger-content);
-    background-color: var(--danger-main);
-    border: 1px solid var(--danger-main);
-}
-
 .note-text {
     color: var(--note-clr);
     font-size: 14px;

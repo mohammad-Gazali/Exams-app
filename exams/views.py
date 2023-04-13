@@ -154,8 +154,6 @@ def exam_details(request: HttpRequest, exam_id: UUID) -> HttpResponse:
     return render(request, "teacher/exams/exam_details.html", {"exam": exam})
 
 
-# TODO: fix sql queries here
-# TODO: add previous answers, and if not remove wrong class for static-checkbox-card
 @user_passes_test(normal_user_test, "profile")
 def take_exam(request: HttpRequest, exam_id: UUID) -> HttpResponse:
     exam = get_object_or_404(Exam.objects.prefetch_related("mcq_questions__choiceanswer_set", "true_false_questions", "essay_questions__essayquestionkeyword_set"), id=exam_id)    

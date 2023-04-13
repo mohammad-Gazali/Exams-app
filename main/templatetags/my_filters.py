@@ -36,10 +36,11 @@ def get_result_colors(num: int):
 
 @register.filter("get_keywords")
 def get_keywords(queryset: QuerySet[EssayQuestionKeyword]):
+    #? the huge number of queries in exam_result view solved here where I used normal list comprehension instead of values_list(..., flat=True) method
     if get_language() == "en":
-        return queryset.values_list("content_english", flat=True)
+        return [q.content_english for q in queryset]
     else:
-        return queryset.values_list("content_arabic",  flat=True)
+        return [q.content_arabic for q in queryset]
 
 
 register.filter("format_right_answer_essay", format_right_answer_essay)
