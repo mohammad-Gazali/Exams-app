@@ -1,19 +1,21 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from exams.models import Exam, MultipleChoiceQuestion, ChoiceAnswer, TrueFalseQuestion, EssayQuestion
-
+from exams.models import (
+    Exam,
+    MultipleChoiceQuestion,
+    ChoiceAnswer,
+    TrueFalseQuestion,
+    EssayQuestion,
+)
 
 
 class ExamForm(forms.ModelForm):
 
     is_demo = forms.CharField(
-        widget=forms.CheckboxInput(attrs={"class": "checkbox"}),
-        required=False
+        widget=forms.CheckboxInput(attrs={"class": "checkbox"}), required=False
     )
 
-    price = forms.CharField(
-        label=_("Price In Dollars $")
-    )
+    price = forms.CharField(label=_("Price In Dollars $"))
 
     class Meta:
         model = Exam
@@ -50,4 +52,3 @@ class EssayQuestionForm(forms.ModelForm):
     class Meta:
         model = EssayQuestion
         exclude = ["teacher", "is_finish"]
-        

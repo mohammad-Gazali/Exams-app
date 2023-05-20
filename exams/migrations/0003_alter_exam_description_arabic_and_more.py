@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('exams', '0002_exam_description_arabic_exam_description_english'),
+        ("exams", "0002_exam_description_arabic_exam_description_english"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='exam',
-            name='description_arabic',
-            field=models.TextField(null=True, verbose_name='description arabic'),
+            model_name="exam",
+            name="description_arabic",
+            field=models.TextField(null=True, verbose_name="description arabic"),
         ),
         migrations.AlterField(
-            model_name='exam',
-            name='description_english',
-            field=models.TextField(null=True, verbose_name='description english'),
+            model_name="exam",
+            name="description_english",
+            field=models.TextField(null=True, verbose_name="description english"),
         ),
     ]

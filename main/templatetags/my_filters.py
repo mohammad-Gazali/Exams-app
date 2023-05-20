@@ -15,7 +15,6 @@ def get_attr_lang(obj, attr: str):
         return getattr(obj, f"{attr}_english")
     else:
         return getattr(obj, f"{attr}_arabic")
-    
 
 
 @register.filter("get_result_colors")
@@ -32,11 +31,11 @@ def get_result_colors(num: int):
         return number_three
     else:
         return number_four
-    
+
 
 @register.filter("get_keywords")
 def get_keywords(queryset: QuerySet[EssayQuestionKeyword]):
-    #? the huge number of queries in exam_result view solved here where I used normal list comprehension instead of values_list(..., flat=True) method
+    # ? the huge number of queries in exam_result view solved here where I used normal list comprehension instead of values_list(..., flat=True) method
     if get_language() == "en":
         return [q.content_english for q in queryset]
     else:

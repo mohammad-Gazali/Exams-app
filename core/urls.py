@@ -6,29 +6,22 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # admin urls
-    path('admin/', admin.site.urls),
-
+    path("admin/", admin.site.urls),
     # my apps
-    path('', include('main.urls')),
-    path('my-accounts/', include('accounts.urls')),
-    path('exams/', include('exams.urls')),
-
-
+    path("", include("main.urls")),
+    path("my-accounts/", include("accounts.urls")),
+    path("exams/", include("exams.urls")),
     # for google authentication
-    path('accounts/', include('allauth.urls')),
-
+    path("accounts/", include("allauth.urls")),
     # for translating
-    path('i18n/', include('django.conf.urls.i18n')),
-
+    path("i18n/", include("django.conf.urls.i18n")),
     # for email vertification
-    path('verification/', include('verify_email.urls')),
-
+    path("verification/", include("verify_email.urls")),
     # for ckeditor uploading images
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-
+    path("ckeditor/", include("ckeditor_uploader.urls")),
     # TODO: Remove After Finishing Development
     # debug toolbar
-    path('__debug__/', include('debug_toolbar.urls')),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 if settings.DEBUG:

@@ -7,68 +7,92 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('exams', '0005_exam_is_finish'),
+        ("exams", "0005_exam_is_finish"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='essayquestion',
-            name='question_arabic',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='question arabic'),
+            model_name="essayquestion",
+            name="question_arabic",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="question arabic"
+            ),
         ),
         migrations.AlterField(
-            model_name='essayquestion',
-            name='question_english',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='question english'),
+            model_name="essayquestion",
+            name="question_english",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="question english"
+            ),
         ),
         migrations.AlterField(
-            model_name='essayquestion',
-            name='right_answer_arabic',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='right answer arabic'),
+            model_name="essayquestion",
+            name="right_answer_arabic",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="right answer arabic"
+            ),
         ),
         migrations.AlterField(
-            model_name='essayquestion',
-            name='right_answer_english',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='right answer english'),
+            model_name="essayquestion",
+            name="right_answer_english",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="right answer english"
+            ),
         ),
         migrations.AlterField(
-            model_name='multiplechoicequestion',
-            name='cause_arabic',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='cause arabic'),
+            model_name="multiplechoicequestion",
+            name="cause_arabic",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="cause arabic"
+            ),
         ),
         migrations.AlterField(
-            model_name='multiplechoicequestion',
-            name='cause_english',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='cause english'),
+            model_name="multiplechoicequestion",
+            name="cause_english",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="cause english"
+            ),
         ),
         migrations.AlterField(
-            model_name='multiplechoicequestion',
-            name='question_arabic',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='question arabic'),
+            model_name="multiplechoicequestion",
+            name="question_arabic",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="question arabic"
+            ),
         ),
         migrations.AlterField(
-            model_name='multiplechoicequestion',
-            name='question_english',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='question english'),
+            model_name="multiplechoicequestion",
+            name="question_english",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="question english"
+            ),
         ),
         migrations.AlterField(
-            model_name='truefalsequestion',
-            name='cause_arabic',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='cause arabic'),
+            model_name="truefalsequestion",
+            name="cause_arabic",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="cause arabic"
+            ),
         ),
         migrations.AlterField(
-            model_name='truefalsequestion',
-            name='cause_english',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='cause english'),
+            model_name="truefalsequestion",
+            name="cause_english",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="cause english"
+            ),
         ),
         migrations.AlterField(
-            model_name='truefalsequestion',
-            name='question_arabic',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='question arabic'),
+            model_name="truefalsequestion",
+            name="question_arabic",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="question arabic"
+            ),
         ),
         migrations.AlterField(
-            model_name='truefalsequestion',
-            name='question_english',
-            field=ckeditor_uploader.fields.RichTextUploadingField(verbose_name='question english'),
+            model_name="truefalsequestion",
+            name="question_english",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                verbose_name="question english"
+            ),
         ),
     ]

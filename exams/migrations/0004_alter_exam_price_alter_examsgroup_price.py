@@ -6,18 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('exams', '0003_alter_exam_description_arabic_and_more'),
+        ("exams", "0003_alter_exam_description_arabic_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='exam',
-            name='price',
-            field=models.DecimalField(decimal_places=2, default=0.0, max_digits=10, verbose_name='price'),
+            model_name="exam",
+            name="price",
+            field=models.DecimalField(
+                decimal_places=2, default=0.0, max_digits=10, verbose_name="price"
+            ),
         ),
         migrations.AlterField(
-            model_name='examsgroup',
-            name='price',
-            field=models.DecimalField(decimal_places=2, default=0.0, max_digits=10, verbose_name='price'),
+            model_name="examsgroup",
+            name="price",
+            field=models.DecimalField(
+                decimal_places=2, default=0.0, max_digits=10, verbose_name="price"
+            ),
         ),
     ]

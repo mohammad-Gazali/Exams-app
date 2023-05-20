@@ -18,51 +18,150 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Constants',
+            name="Constants",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=127, unique=True, verbose_name='name')),
-                ('content_arabic', models.TextField(verbose_name='content arabic')),
-                ('content_english', models.TextField(verbose_name='content english')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=127, unique=True, verbose_name="name"),
+                ),
+                ("content_arabic", models.TextField(verbose_name="content arabic")),
+                ("content_english", models.TextField(verbose_name="content english")),
             ],
             options={
-                'verbose_name': 'constant',
-                'verbose_name_plural': 'constants',
+                "verbose_name": "constant",
+                "verbose_name_plural": "constants",
             },
         ),
         migrations.CreateModel(
-            name='NormalUser',
+            name="NormalUser",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('gender', models.CharField(choices=[('MALE', 'male'), ('FAMALE', 'famale')], max_length=6, verbose_name='gender')),
-                ('nationality', models.CharField(max_length=127, verbose_name='nationality')),
-                ('birthdate', models.DateField(verbose_name='birthdate')),
-                ('phone_number', phonenumber_field.modelfields.PhoneNumberField(max_length=128, region=None)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='created at')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='user')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "gender",
+                    models.CharField(
+                        choices=[("MALE", "male"), ("FAMALE", "famale")],
+                        max_length=6,
+                        verbose_name="gender",
+                    ),
+                ),
+                (
+                    "nationality",
+                    models.CharField(max_length=127, verbose_name="nationality"),
+                ),
+                ("birthdate", models.DateField(verbose_name="birthdate")),
+                (
+                    "phone_number",
+                    phonenumber_field.modelfields.PhoneNumberField(
+                        max_length=128, region=None
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="created at"),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="user",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'normal user',
-                'verbose_name_plural': 'normal users',
+                "verbose_name": "normal user",
+                "verbose_name_plural": "normal users",
             },
         ),
         migrations.CreateModel(
-            name='Teacher',
+            name="Teacher",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('gender', models.CharField(choices=[('MALE', 'male'), ('FAMALE', 'famale')], max_length=6, verbose_name='gender')),
-                ('nationality', models.CharField(max_length=127, verbose_name='nationality')),
-                ('birthdate', models.DateField(verbose_name='birthdate')),
-                ('phone_number', phonenumber_field.modelfields.PhoneNumberField(max_length=128, region=None)),
-                ('bio', models.TextField(validators=[django.core.validators.MinLengthValidator(1300)], verbose_name='bio')),
-                ('cv', models.FileField(blank=True, null=True, upload_to='teachers_cvs', verbose_name='CV')),
-                ('certificate', models.FileField(blank=True, null=True, upload_to='teachers_certificates', verbose_name='certificate')),
-                ('is_active', models.BooleanField(default=False, verbose_name='is active')),
-                ('normal_user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='main.normaluser', verbose_name='normal user')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "gender",
+                    models.CharField(
+                        choices=[("MALE", "male"), ("FAMALE", "famale")],
+                        max_length=6,
+                        verbose_name="gender",
+                    ),
+                ),
+                (
+                    "nationality",
+                    models.CharField(max_length=127, verbose_name="nationality"),
+                ),
+                ("birthdate", models.DateField(verbose_name="birthdate")),
+                (
+                    "phone_number",
+                    phonenumber_field.modelfields.PhoneNumberField(
+                        max_length=128, region=None
+                    ),
+                ),
+                (
+                    "bio",
+                    models.TextField(
+                        validators=[django.core.validators.MinLengthValidator(1300)],
+                        verbose_name="bio",
+                    ),
+                ),
+                (
+                    "cv",
+                    models.FileField(
+                        blank=True,
+                        null=True,
+                        upload_to="teachers_cvs",
+                        verbose_name="CV",
+                    ),
+                ),
+                (
+                    "certificate",
+                    models.FileField(
+                        blank=True,
+                        null=True,
+                        upload_to="teachers_certificates",
+                        verbose_name="certificate",
+                    ),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(default=False, verbose_name="is active"),
+                ),
+                (
+                    "normal_user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="main.normaluser",
+                        verbose_name="normal user",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'teacher',
-                'verbose_name_plural': 'teachers',
+                "verbose_name": "teacher",
+                "verbose_name_plural": "teachers",
             },
         ),
     ]

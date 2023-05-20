@@ -7,19 +7,11 @@ from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from main.models import NormalUser, Teacher
 
 
-
-
 class SendingEmailForm(forms.Form):
 
-    subject = forms.CharField(
-        label=_("Subject"),
-        widget=forms.TextInput()
-    )
+    subject = forms.CharField(label=_("Subject"), widget=forms.TextInput())
 
-    message = forms.CharField(
-        label=_("Message"),
-        widget=forms.Textarea()
-    )
+    message = forms.CharField(label=_("Message"), widget=forms.Textarea())
 
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
@@ -28,8 +20,8 @@ class CreateNormalUserForm(forms.ModelForm):
 
     phone_number = PhoneNumberField(
         widget=PhoneNumberPrefixWidget(
-        country_attrs={"class": "phone_number_select"},
-        number_attrs={"class": "phone_number_input", "pattern": r"[-\d]+"}
+            country_attrs={"class": "phone_number_select"},
+            number_attrs={"class": "phone_number_input", "pattern": r"[-\d]+"},
         ),
     )
 
@@ -39,14 +31,18 @@ class CreateNormalUserForm(forms.ModelForm):
 
     class Meta:
         model = NormalUser
-        fields = ["gender", "nationality", "birthdate", "phone_number", "personal_image"]
+        fields = [
+            "gender",
+            "nationality",
+            "birthdate",
+            "phone_number",
+            "personal_image",
+        ]
 
 
 class CreateTeacherForm(forms.ModelForm):
 
-    bio = forms.CharField(
-        widget=forms.Textarea(attrs={"minlength": "1300"})
-    )
+    bio = forms.CharField(widget=forms.Textarea(attrs={"minlength": "1300"}))
 
     class Meta:
         model = Teacher

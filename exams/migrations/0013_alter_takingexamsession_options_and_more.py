@@ -6,18 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('exams', '0012_takingexamsession'),
+        ("exams", "0012_takingexamsession"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='takingexamsession',
-            options={'verbose_name': 'taking exam session', 'verbose_name_plural': 'taking exam sessions'},
+            name="takingexamsession",
+            options={
+                "verbose_name": "taking exam session",
+                "verbose_name_plural": "taking exam sessions",
+            },
         ),
         migrations.AddField(
-            model_name='takingexamsession',
-            name='duration',
-            field=models.DurationField(default=None, verbose_name='duration'),
+            model_name="takingexamsession",
+            name="duration",
+            field=models.DurationField(default=None, verbose_name="duration"),
             preserve_default=False,
         ),
     ]

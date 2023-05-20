@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('exams', '0008_alter_essayquestion_right_answer_arabic_and_more'),
+        ("exams", "0008_alter_essayquestion_right_answer_arabic_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='essayquestion',
-            name='is_finish',
-            field=models.BooleanField(default=False, verbose_name='is finish'),
+            model_name="essayquestion",
+            name="is_finish",
+            field=models.BooleanField(default=False, verbose_name="is finish"),
         ),
         migrations.AddField(
-            model_name='multiplechoicequestion',
-            name='is_finish',
-            field=models.BooleanField(default=False, verbose_name='is finish'),
+            model_name="multiplechoicequestion",
+            name="is_finish",
+            field=models.BooleanField(default=False, verbose_name="is finish"),
         ),
         migrations.AddField(
-            model_name='truefalsequestion',
-            name='is_finish',
-            field=models.BooleanField(default=False, verbose_name='is finish'),
+            model_name="truefalsequestion",
+            name="is_finish",
+            field=models.BooleanField(default=False, verbose_name="is finish"),
         ),
     ]

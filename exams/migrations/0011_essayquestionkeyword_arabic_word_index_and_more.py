@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('exams', '0010_rename_essayquestoionkeyword_essayquestionkeyword'),
+        ("exams", "0010_rename_essayquestoionkeyword_essayquestionkeyword"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='essayquestionkeyword',
-            name='arabic_word_index',
+            model_name="essayquestionkeyword",
+            name="arabic_word_index",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='essayquestionkeyword',
-            name='english_word_index',
+            model_name="essayquestionkeyword",
+            name="english_word_index",
             field=models.IntegerField(default=0),
         ),
     ]

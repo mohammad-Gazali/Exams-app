@@ -13,13 +13,12 @@ from exams.models import Exam, MultipleChoiceQuestion, TrueFalseQuestion, EssayQ
 from typing import Literal
 
 
-
 def index(request: HttpRequest) -> HttpResponse:
-    return render(request, 'index.html')
+    return render(request, "index.html")
 
 
 def about_us(request: HttpRequest) -> HttpResponse:
-    return render(request, 'about_us.html')
+    return render(request, "about_us.html")
 
 
 def contact(request: HttpRequest) -> HttpResponse:
@@ -32,44 +31,44 @@ def contact(request: HttpRequest) -> HttpResponse:
 
         if not request.user.is_authenticated:
             return redirect("contact")
-        
 
         form = SendingEmailForm(request.POST)
 
         if form.is_valid():
 
             if not request.user.is_authenticated:
-                form.add_error(field=None, error=_("Please Login Firstly, You Should Login Before Sending a Contact Email."))
-
+                form.add_error(
+                    field=None,
+                    error=_(
+                        "Please Login Firstly, You Should Login Before Sending a Contact Email."
+                    ),
+                )
 
             else:
                 subject = form.cleaned_data.get("subject")
                 message = form.cleaned_data.get("message")
 
-
-                msg_html = render_to_string('email/contact.html', {
-                    "subject": subject,
-                    "message": message
-                    })
+                msg_html = render_to_string(
+                    "email/contact.html", {"subject": subject, "message": message}
+                )
 
                 send_mail(
                     subject=subject,
                     html_message=msg_html,
                     message=msg_html,
-                    from_email=request.user.email, # type: ignore
-                    recipient_list= [settings.CONTACT_EMAIL]
+                    from_email=request.user.email,  # type: ignore
+                    recipient_list=[settings.CONTACT_EMAIL],
                 )
 
                 sended = True
 
                 form = SendingEmailForm()
 
-
-    return render(request, 'contact.html', {"form": form, "sended": sended})
+    return render(request, "contact.html", {"form": form, "sended": sended})
 
 
 def support(request: HttpRequest) -> HttpResponse:
-    return render(request, 'support.html')
+    return render(request, "support.html")
 
 
 @login_required
@@ -79,8 +78,12 @@ def profile(request: HttpRequest) -> HttpResponse:
     if normal_user:
         is_teacher = bool(Teacher.objects.filter(normal_user=normal_user))
 
-        return render(request, "profile/profile_main.html", {"normal_user": normal_user, "is_teacher": is_teacher})
-    
+        return render(
+            request,
+            "profile/profile_main.html",
+            {"normal_user": normal_user, "is_teacher": is_teacher},
+        )
+
     else:
         form = CreateNormalUserForm()
         if request.method == "POST":
@@ -93,13 +96,15 @@ def profile(request: HttpRequest) -> HttpResponse:
                     birthdate=form.cleaned_data["birthdate"],
                     phone_number=form.cleaned_data["phone_number"],
                     personal_image=form.cleaned_data["personal_image"],
-                    user_id=request.user.id  # type: ignore
+                    user_id=request.user.id,  # type: ignore
                 )
 
-                return render(request, "profile/profile_main.html", {"normal_user": normal_user})
+                return render(
+                    request, "profile/profile_main.html", {"normal_user": normal_user}
+                )
 
         return render(request, "profile/profile_make.html", {"form": form})
-    
+
 
 @user_passes_test(normal_user_test, "profile")
 def teacher_main(request: HttpRequest) -> HttpResponse:
@@ -110,7 +115,11 @@ def teacher_main(request: HttpRequest) -> HttpResponse:
         paginator = Paginator(exams, 6)
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
-        return render(request, "teacher/teacher_dashboard.html", {"teacher": teacher, "page_obj": page_obj})
+        return render(
+            request,
+            "teacher/teacher_dashboard.html",
+            {"teacher": teacher, "page_obj": page_obj},
+        )
 
     else:
         form = CreateTeacherForm()
@@ -122,34 +131,39 @@ def teacher_main(request: HttpRequest) -> HttpResponse:
                     bio=form.cleaned_data["bio"],
                     cv=form.cleaned_data["cv"],
                     certificate=form.cleaned_data["certificate"],
-                    normal_user=normal_user
+                    normal_user=normal_user,
                 )
 
-                return render(request, "teacher/teacher_dashboard.html", {"teacher": teacher})
-            
+                return render(
+                    request, "teacher/teacher_dashboard.html", {"teacher": teacher}
+                )
+
         return render(request, "teacher/teacher_make.html", {"form": form})
-    
+
 
 @user_passes_test(teacher_user_test, "teacher")
 def teacher_exams(request: HttpRequest) -> HttpResponse:
     normal_user = NormalUser.objects.get(user=request.user)
     teacher = Teacher.objects.get(normal_user_id=normal_user)
-    
+
     exams = Exam.objects.filter(teacher=teacher).order_by("-created_at")
     paginator = Paginator(exams, 6)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    return render(request, "teacher/my_exams.html", {"teacher": teacher, "page_obj": page_obj})
+    return render(
+        request, "teacher/my_exams.html", {"teacher": teacher, "page_obj": page_obj}
+    )
 
 
 @user_passes_test(teacher_user_test, "teacher")
-def teacher_questions(request: HttpRequest, q_type: Literal["mcq", "true-false", "essay"]) -> HttpResponse:
+def teacher_questions(
+    request: HttpRequest, q_type: Literal["mcq", "true-false", "essay"]
+) -> HttpResponse:
     normal_user = NormalUser.objects.get(user=request.user)
     teacher = Teacher.objects.prefetch_related().get(normal_user_id=normal_user)
 
     page_number = request.GET.get("page")
-
 
     mcq_questions = MultipleChoiceQuestion.objects.filter(teacher=teacher)
     mcq_paginator = Paginator(mcq_questions, 12)
@@ -164,25 +178,22 @@ def teacher_questions(request: HttpRequest, q_type: Literal["mcq", "true-false",
     essay_page_obj = essay_paginator.get_page(page_number)
 
     if q_type == "mcq":
-        return render(request, "teacher/my_questions.html", {
-                "teacher": teacher,
-                "page_obj": mcq_page_obj,
-                "type": "mcq"
-            }
+        return render(
+            request,
+            "teacher/my_questions.html",
+            {"teacher": teacher, "page_obj": mcq_page_obj, "type": "mcq"},
         )
-    
+
     elif q_type == "true-false":
-        return render(request, "teacher/my_questions.html", {
-                "teacher": teacher,
-                "page_obj": true_false_page_obj,
-                "type": "true-false"
-            }
+        return render(
+            request,
+            "teacher/my_questions.html",
+            {"teacher": teacher, "page_obj": true_false_page_obj, "type": "true-false"},
         )
-    
+
     else:
-        return render(request, "teacher/my_questions.html", {
-                "teacher": teacher,
-                "page_obj": essay_page_obj,
-                "type": "essay"
-            }
+        return render(
+            request,
+            "teacher/my_questions.html",
+            {"teacher": teacher, "page_obj": essay_page_obj, "type": "essay"},
         )

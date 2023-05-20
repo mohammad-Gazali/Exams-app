@@ -7,22 +7,79 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0004_alter_normaluser_personal_image'),
-        ('exams', '0011_essayquestionkeyword_arabic_word_index_and_more'),
+        ("main", "0004_alter_normaluser_personal_image"),
+        ("exams", "0011_essayquestionkeyword_arabic_word_index_and_more"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TakingExamSession',
+            name="TakingExamSession",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='created at')),
-                ('mcq_result', models.DecimalField(decimal_places=2, default=0.0, max_digits=10, verbose_name='mcq_result')),
-                ('true_false_result', models.DecimalField(decimal_places=2, default=0.0, max_digits=10, verbose_name='true_false_result')),
-                ('essay_result', models.DecimalField(decimal_places=2, default=0.0, max_digits=10, verbose_name='essay_result')),
-                ('final_result', models.DecimalField(decimal_places=2, default=0.0, max_digits=10, verbose_name='final_result')),
-                ('exam', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='exams.exam', verbose_name='exam')),
-                ('student', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.normaluser', verbose_name='student')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="created at"),
+                ),
+                (
+                    "mcq_result",
+                    models.DecimalField(
+                        decimal_places=2,
+                        default=0.0,
+                        max_digits=10,
+                        verbose_name="mcq_result",
+                    ),
+                ),
+                (
+                    "true_false_result",
+                    models.DecimalField(
+                        decimal_places=2,
+                        default=0.0,
+                        max_digits=10,
+                        verbose_name="true_false_result",
+                    ),
+                ),
+                (
+                    "essay_result",
+                    models.DecimalField(
+                        decimal_places=2,
+                        default=0.0,
+                        max_digits=10,
+                        verbose_name="essay_result",
+                    ),
+                ),
+                (
+                    "final_result",
+                    models.DecimalField(
+                        decimal_places=2,
+                        default=0.0,
+                        max_digits=10,
+                        verbose_name="final_result",
+                    ),
+                ),
+                (
+                    "exam",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="exams.exam",
+                        verbose_name="exam",
+                    ),
+                ),
+                (
+                    "student",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="main.normaluser",
+                        verbose_name="student",
+                    ),
+                ),
             ],
         ),
     ]
